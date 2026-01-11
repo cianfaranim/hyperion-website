@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Fleet - Hyperion Logistics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00d4ff;
+            --neon-orange: #ff6b35;
+            --dark-bg: #0a0e17;
+            --darker-bg: #050810;
+            --card-bg: rgba(15, 25, 45, 0.6);
+            --text-primary: #e8f0f8;
+            --text-secondary: #8b9cb8;
+            --accent-glow: rgba(0, 212, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background */
+        .background-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        .background-glow {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(255, 107, 53, 0.08) 0%, transparent 50%);
+            animation: glowPulse 15s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 14, 23, 0.8);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            text-decoration: none;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8)); }
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--neon-blue);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .join-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 5% 4rem;
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--neon-blue) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--neon-orange);
+            margin-bottom: 4rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .info-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        .info-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--neon-blue);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .info-section p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .requirement-card {
+            background: rgba(5, 8, 16, 0.6);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            transition: all 0.3s;
+        }
+
+        .requirement-card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .requirement-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-orange);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .requirement-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .requirement-card li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .requirement-card li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 4rem 0;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1.5rem 4rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--neon-blue), #0099cc);
+            color: var(--darker-bg);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+            font-family: 'Rajdhani', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .step-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--neon-blue);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .step h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-orange);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5% 2rem;
+            text-align: center;
+            background: var(--darker-bg);
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .info-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-grid"></div>
+    <div class="background-glow"></div>
+    
+    <div class="content-wrapper">
+        <header>
+            <a href="hyperion-logistics.html" class="logo">Hyperion Logistics</a>
+            <nav>
+                <a href="hyperion-logistics.html#home">Home</a>
+                <a href="hyperion-logistics.html#features">Features</a>
+                <a href="join.html">Join Us</a>
+                <a href="https://hub.hyperionvtc.com" target="_blank">Drivers Hub</a>
+            </nav>
+        </header>
+
+        <div class="join-container">
+            <h1 class="page-title">Join the Fleet</h1>
+            <p class="subtitle">Become a Titan of the Road</p>
+
+            <div class="info-section">
+                <h2>⚡ Welcome, Future Driver</h2>
+                <p>
+                    Hyperion Logistics is seeking dedicated virtual truckers to join our elite fleet. We're not just another VTC - 
+                    we're a community of passionate drivers who take pride in professionalism, teamwork, and the open road.
+                </p>
+                <p>
+                    Whether you're hauling across Europe in ETS2 or traversing America in ATS, you'll find a home here among 
+                    fellow titans of the highway. Our next-generation job tracker and drivers hub will keep you connected and 
+                    organized on every journey.
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h2>📋 Requirements</h2>
+                <div class="requirements-grid">
+                    <div class="requirement-card">
+                        <h3>Game Requirements</h3>
+                        <ul>
+                            <li>Own ETS2 and/or ATS</li>
+                            <li>TruckersMP installed</li>
+                            <li>Active and updated game versions</li>
+                            <li>Stable internet connection</li>
+                        </ul>
+                    </div>
+                    <div class="requirement-card">
+                        <h3>Driver Standards</h3>
+                        <ul>
+                            <li>Respectful and mature behavior</li>
+                            <li>Follow traffic rules in-game</li>
+                            <li>Active participation in convoys</li>
+                            <li>Professional communication</li>
+                        </ul>
+                    </div>
+                    <div class="requirement-card">
+                        <h3>Community</h3>
+                        <ul>
+                            <li>Discord for communication</li>
+                            <li>Regular activity expected</li>
+                            <li>Positive attitude</li>
+                            <li>Team player mentality</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2>🚀 Application Process</h2>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">01</div>
+                        <h3>Apply</h3>
+                        <p>Fill out our application form with your gaming experience and why you want to join</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">02</div>
+                        <h3>Review</h3>
+                        <p>Our recruitment team will review your application within 48 hours</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">03</div>
+                        <h3>Interview</h3>
+                        <p>Brief Discord interview to get to know you and answer any questions</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">04</div>
+                        <h3>Welcome</h3>
+                        <p>Get your Hyperion tags, hub access, and hit the road with your new family!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <p style="font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 2rem;">
+                    Ready to carry the weight of the world across endless highways?
+                </p>
+                <a href="#" class="btn">Submit Application</a>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 2rem;">
+                    Questions? Contact us on Discord or check our Drivers Hub
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <p class="footer-text">© 2026 Hyperion Logistics VTC. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
