@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperion Logistics - Virtual Trucking Company</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00d4ff;
+            --neon-orange: #ff6b35;
+            --dark-bg: #0a0e17;
+            --darker-bg: #050810;
+            --card-bg: rgba(15, 25, 45, 0.6);
+            --text-primary: #e8f0f8;
+            --text-secondary: #8b9cb8;
+            --accent-glow: rgba(0, 212, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background */
+        .background-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        .background-glow {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(255, 107, 53, 0.08) 0%, transparent 50%);
+            animation: glowPulse 15s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 14, 23, 0.8);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8)); }
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--neon-blue);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 5% 6rem;
+            text-align: center;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--neon-blue) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleSlide 1s ease-out 0.5s both;
+        }
+
+        @keyframes titleSlide {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero .tagline {
+            font-size: 1.8rem;
+            color: var(--neon-orange);
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out 0.7s both;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: var(--text-secondary);
+            animation: fadeIn 1s ease-out 0.9s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            animation: fadeIn 1s ease-out 1.1s both;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-blue), #0099cc);
+            color: var(--darker-bg);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            background: linear-gradient(180deg, transparent 0%, rgba(15, 25, 45, 0.3) 100%);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-orange));
+            margin: 1rem auto 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 2.5rem;
+            border-radius: 15px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 6rem 5%;
+            background: rgba(5, 8, 16, 0.8);
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item {
+            position: relative;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            background: var(--darker-bg);
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 2rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-blue);
+            transform: translateY(-5px);
+            filter: drop-shadow(0 5px 10px rgba(0, 212, 255, 0.5));
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-top: 2rem;
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.3rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-grid"></div>
+    <div class="background-glow"></div>
+    
+    <div class="content-wrapper">
+        <header>
+            <div class="logo">
+                <img src="./HyperionLogo.png" alt="Hyperion Logistics" style="height: 80px; width: auto; filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6));">
+            </div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#join">Join Us</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
+
+        <section class="hero" id="home">
+            <img src="./HyperionLogo.png" alt="Hyperion Logistics" style="max-width: 300px; width: 100%; height: auto; margin: 0 auto 2rem; display: block; filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.5)); animation: fadeIn 1s ease-out 0.2s both;">
+            <h1>Hyperion Logistics</h1>
+            <div class="tagline">A Titan In Transit</div>
+            <p>Join the premier virtual trucking company in Euro Truck Simulator 2 and American Truck Simulator. Experience professional logistics operations with a passionate community of drivers.</p>
+            <p style="font-size: 1.2rem; color: var(--neon-blue); font-weight: 600; margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 1.5px;">
+                🎯 Featuring our own next-generation custom built job tracker and drivers hub
+            </p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary">Join the Fleet</button>
+                <button class="btn btn-secondary">View Requirements</button>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <h2 class="section-title">Why Choose Hyperion?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🚛</span>
+                    <h3>Professional Operations</h3>
+                    <p>Experience realistic trucking operations with organized convoys, scheduled routes, and professional dispatch systems.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">👥</span>
+                    <h3>Active Community</h3>
+                    <p>Join a friendly and active community of trucking enthusiasts. Regular events, convoys, and social gatherings.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🏆</span>
+                    <h3>Competitive Events</h3>
+                    <p>Participate in weekly challenges, seasonal competitions, and special events with rewards and recognition.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h3>Advanced Tracking</h3>
+                    <p>Track your progress, miles driven, and deliveries completed with our comprehensive statistics system.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎮</span>
+                    <h3>Multi-Platform</h3>
+                    <p>Active on both Euro Truck Simulator 2 and American Truck Simulator with cross-platform events.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌍</span>
+                    <h3>Global Network</h3>
+                    <p>Connect with drivers from around the world. Multiple language support and international operations.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Active Drivers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2.5M+</span>
+                    <span class="stat-label">Miles Driven</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">150+</span>
+                    <span class="stat-label">Weekly Convoys</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Support</span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <img src="./HyperionLogo.png" alt="Hyperion Logistics" style="max-width: 200px; width: 100%; height: auto; margin: 0 auto 1rem; display: block; filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.4));">
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem;">
+                    Your journey on the virtual highway starts here. Professional virtual trucking for ETS2 and ATS.
+                </p>
+                <div class="social-links">
+                    <a href="#" title="Discord">💬</a>
+                    <a href="#" title="TruckersMP">🚚</a>
+                    <a href="#" title="Twitter">🐦</a>
+                    <a href="#" title="YouTube">📺</a>
+                </div>
+                <p class="footer-text">© 2026 Hyperion Logistics VTC. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
