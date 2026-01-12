@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join the Fleet - Hyperion Logistics</title>
+    <meta name="description" content="Join Hyperion Logistics VTC - Apply to become a professional virtual trucker. ETS2 and ATS opportunities with weekly convoys and custom job tracking.">
+    <meta name="keywords" content="join VTC, virtual trucking application, ETS2 jobs, ATS recruitment, TruckersMP">
+    <meta name="theme-color" content="#00d4ff">
+    
+    <title>Join Hyperion Logistics - Virtual Trucking Recruitment | ETS2 & ATS</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
     <style>
         :root {
             --neon-blue: #00d4ff;
@@ -17,6 +24,7 @@
             --text-primary: #e8f0f8;
             --text-secondary: #8b9cb8;
             --accent-glow: rgba(0, 212, 255, 0.3);
+            --transition-speed: 0.3s;
         }
 
         * {
@@ -31,6 +39,8 @@
             color: var(--text-primary);
             overflow-x: hidden;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Animated background */
@@ -46,6 +56,8 @@
             background-size: 60px 60px;
             animation: gridMove 20s linear infinite;
             z-index: 0;
+            will-change: transform;
+            pointer-events: none;
         }
 
         @keyframes gridMove {
@@ -63,6 +75,8 @@
                         radial-gradient(circle at 70% 50%, rgba(255, 107, 53, 0.08) 0%, transparent 50%);
             animation: glowPulse 15s ease-in-out infinite;
             z-index: 0;
+            will-change: opacity;
+            pointer-events: none;
         }
 
         @keyframes glowPulse {
@@ -70,19 +84,43 @@
             50% { opacity: 0.6; }
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         .content-wrapper {
             position: relative;
             z-index: 1;
         }
 
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--neon-blue);
+            color: var(--darker-bg);
+            padding: 8px;
+            text-decoration: none;
+            z-index: 1000;
+            font-weight: bold;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
         /* Header */
         header {
-            padding: 2rem 5%;
+            padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             backdrop-filter: blur(10px);
-            background: rgba(10, 14, 23, 0.8);
+            background: rgba(10, 14, 23, 0.95);
             border-bottom: 1px solid rgba(0, 212, 255, 0.2);
             position: sticky;
             top: 0;
@@ -97,7 +135,7 @@
 
         .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: 900;
             letter-spacing: 3px;
             background: linear-gradient(135deg, var(--neon-blue), var(--neon-orange));
@@ -107,6 +145,7 @@
             text-transform: uppercase;
             text-decoration: none;
             animation: logoGlow 3s ease-in-out infinite;
+            will-change: filter;
         }
 
         @keyframes logoGlow {
@@ -114,38 +153,60 @@
             50% { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8)); }
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all var(--transition-speed);
+        }
+
+        .menu-toggle:hover {
+            background: var(--neon-blue);
+            color: var(--darker-bg);
+        }
+
         nav {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
+            align-items: center;
         }
 
         nav a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
             position: relative;
-            transition: color 0.3s;
+            transition: color var(--transition-speed);
+            padding: 0.5rem 0;
         }
 
         nav a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
             background: var(--neon-blue);
-            transition: width 0.3s;
+            transition: width var(--transition-speed);
         }
 
-        nav a:hover {
+        nav a:hover,
+        nav a:focus {
             color: var(--neon-blue);
+            outline: none;
         }
 
-        nav a:hover::after {
+        nav a:hover::after,
+        nav a:focus::after {
             width: 100%;
         }
 
@@ -153,16 +214,16 @@
         .join-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 6rem 5% 4rem;
+            padding: clamp(3rem, 8vh, 6rem) 5% 4rem;
         }
 
         .page-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 6vw, 4rem);
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: clamp(2px, 1vw, 5px);
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--neon-blue) 100%);
             -webkit-background-clip: text;
             background-clip: text;
@@ -177,9 +238,9 @@
 
         .subtitle {
             text-align: center;
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             color: var(--neon-orange);
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
             font-weight: 600;
             letter-spacing: 2px;
             animation: fadeIn 1s ease-out 0.2s both;
@@ -189,23 +250,23 @@
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 212, 255, 0.2);
-            padding: 3rem;
+            padding: clamp(2rem, 4vw, 3rem);
             border-radius: 15px;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             animation: fadeIn 1s ease-out 0.4s both;
         }
 
         .info-section h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 3vw, 2rem);
             color: var(--neon-blue);
             margin-bottom: 1.5rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: clamp(1px, 0.5vw, 3px);
         }
 
         .info-section p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 1rem;
@@ -213,9 +274,9 @@
 
         .requirements-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            margin: 2.5rem 0;
         }
 
         .requirement-card {
@@ -226,7 +287,8 @@
             transition: all 0.3s;
         }
 
-        .requirement-card:hover {
+        .requirement-card:hover,
+        .requirement-card:focus-within {
             border-color: var(--neon-blue);
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
@@ -236,7 +298,7 @@
             font-family: 'Orbitron', sans-serif;
             color: var(--neon-orange);
             margin-bottom: 1rem;
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
             text-transform: uppercase;
             letter-spacing: 2px;
         }
@@ -251,7 +313,7 @@
             margin-bottom: 0.5rem;
             padding-left: 1.5rem;
             position: relative;
-            font-size: 1.1rem;
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
         }
 
         .requirement-card li::before {
@@ -263,16 +325,16 @@
 
         .cta-section {
             text-align: center;
-            margin: 4rem 0;
+            margin: 3rem 0;
             animation: fadeIn 1s ease-out 0.6s both;
         }
 
         .btn {
-            padding: 1.5rem 4rem;
-            font-size: 1.3rem;
+            padding: 1.2rem 3rem;
+            font-size: clamp(1rem, 2vw, 1.3rem);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: clamp(1px, 0.5vw, 3px);
             border: none;
             cursor: pointer;
             background: linear-gradient(135deg, var(--neon-blue), #0099cc);
@@ -280,14 +342,18 @@
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s;
+            transition: transform var(--transition-speed);
             font-family: 'Rajdhani', sans-serif;
             text-decoration: none;
             display: inline-block;
+            border-radius: 5px;
         }
 
-        .btn:hover {
+        .btn:hover,
+        .btn:focus {
             transform: translateY(-3px);
+            outline: 2px solid var(--neon-blue);
+            outline-offset: 2px;
         }
 
         .btn::before {
@@ -307,14 +373,14 @@
 
         .process-steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            margin: 2.5rem 0;
         }
 
         .step {
             text-align: center;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 212, 255, 0.2);
@@ -322,7 +388,8 @@
             transition: all 0.3s;
         }
 
-        .step:hover {
+        .step:hover,
+        .step:focus-within {
             transform: translateY(-10px);
             border-color: var(--neon-blue);
             box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
@@ -330,24 +397,38 @@
 
         .step-number {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
+            font-size: clamp(2rem, 5vw, 3rem);
             color: var(--neon-blue);
             font-weight: 900;
             margin-bottom: 1rem;
+            line-height: 1;
         }
 
         .step h3 {
             font-family: 'Orbitron', sans-serif;
             color: var(--neon-orange);
             margin-bottom: 1rem;
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
         .step p {
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            line-height: 1.6;
+        }
+
+        .cta-description {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .cta-note {
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            color: var(--text-secondary);
+            margin-top: 2rem;
         }
 
         /* Footer */
@@ -356,54 +437,110 @@
             text-align: center;
             background: var(--darker-bg);
             border-top: 1px solid rgba(0, 212, 255, 0.2);
-            margin-top: 4rem;
+            margin-top: 3rem;
         }
 
         .footer-text {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
-        /* Responsive */
+        /* Mobile Navigation */
         @media (max-width: 768px) {
-            .page-title {
-                font-size: 2.5rem;
-            }
-
-            .subtitle {
-                font-size: 1.2rem;
+            .menu-toggle {
+                display: block;
             }
 
             nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(10, 14, 23, 0.98);
+                backdrop-filter: blur(20px);
                 flex-direction: column;
-                gap: 1rem;
+                justify-content: flex-start;
+                padding: 5rem 2rem 2rem;
+                gap: 1.5rem;
+                transition: right 0.4s ease;
+                border-left: 1px solid rgba(0, 212, 255, 0.2);
+                z-index: 99;
             }
 
-            .info-section {
-                padding: 2rem;
+            nav.active {
+                right: 0;
+            }
+
+            nav a {
+                font-size: 1.2rem;
+                padding: 1rem 0;
+                width: 100%;
+                text-align: left;
+                border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            }
+
+            .mobile-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 98;
+            }
+
+            .mobile-overlay.active {
+                display: block;
+            }
+
+            header {
+                padding: 1rem 5%;
+            }
+        }
+
+        @media print {
+            .background-grid,
+            .background-glow,
+            header,
+            .btn,
+            footer {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
             }
         }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <div class="background-grid"></div>
     <div class="background-glow"></div>
     
     <div class="content-wrapper">
-        <header>
-            <a href="index.html" class="logo">Hyperion Logistics</a>
-            <nav>
-                <a href="index.html#home">Home</a>
-                <a href="join.html">Join Us</a>
-                <a href="https://hub.hyperionvtc.com" target="_blank">Drivers Hub</a>
+        <header role="banner">
+            <a href="index.html" class="logo" aria-label="Return to Hyperion Logistics Home">Hyperion Logistics</a>
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <nav role="navigation" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="join.html" aria-current="page">Join Us</a>
+                <a href="https://hub.hyperionvtc.com" target="_blank" rel="noopener noreferrer">Drivers Hub</a>
             </nav>
         </header>
 
-        <div class="join-container">
+        <div class="mobile-overlay"></div>
+
+        <main id="main-content" class="join-container">
             <h1 class="page-title">Join the Fleet</h1>
             <p class="subtitle">Become a Titan of the Road</p>
 
-            <div class="info-section">
+            <section class="info-section">
                 <h2>⚡ Welcome, Future Driver</h2>
                 <p>
                     Hyperion Logistics is seeking dedicated virtual truckers to join our elite fleet. We're not just another VTC - 
@@ -414,12 +551,12 @@
                     fellow titans of the highway. Our next-generation job tracker and drivers hub will keep you connected and 
                     organized on every journey.
                 </p>
-            </div>
+            </section>
 
-            <div class="info-section">
+            <section class="info-section">
                 <h2>📋 Requirements</h2>
                 <div class="requirements-grid">
-                    <div class="requirement-card">
+                    <article class="requirement-card">
                         <h3>Game Requirements</h3>
                         <ul>
                             <li>Own ETS2 and/or ATS</li>
@@ -427,8 +564,8 @@
                             <li>Active and updated game versions</li>
                             <li>Stable internet connection</li>
                         </ul>
-                    </div>
-                    <div class="requirement-card">
+                    </article>
+                    <article class="requirement-card">
                         <h3>Driver Standards</h3>
                         <ul>
                             <li>Respectful and mature behavior</li>
@@ -436,8 +573,8 @@
                             <li>Active participation in convoys</li>
                             <li>Professional communication</li>
                         </ul>
-                    </div>
-                    <div class="requirement-card">
+                    </article>
+                    <article class="requirement-card">
                         <h3>Community</h3>
                         <ul>
                             <li>Discord for communication</li>
@@ -445,50 +582,84 @@
                             <li>Positive attitude</li>
                             <li>Team player mentality</li>
                         </ul>
-                    </div>
+                    </article>
                 </div>
-            </div>
+            </section>
 
-            <div class="info-section">
+            <section class="info-section">
                 <h2>🚀 Application Process</h2>
                 <div class="process-steps">
-                    <div class="step">
-                        <div class="step-number">01</div>
+                    <article class="step">
+                        <div class="step-number" aria-hidden="true">01</div>
                         <h3>Apply</h3>
                         <p>Fill out our application form with your gaming experience and why you want to join</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">02</div>
+                    </article>
+                    <article class="step">
+                        <div class="step-number" aria-hidden="true">02</div>
                         <h3>Review</h3>
                         <p>Our recruitment team will review your application within 48 hours</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">03</div>
+                    </article>
+                    <article class="step">
+                        <div class="step-number" aria-hidden="true">03</div>
                         <h3>Interview</h3>
                         <p>Brief Discord interview to get to know you and answer any questions</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">04</div>
+                    </article>
+                    <article class="step">
+                        <div class="step-number" aria-hidden="true">04</div>
                         <h3>Welcome</h3>
                         <p>Get your Hyperion tags, hub access, and hit the road with your new family!</p>
-                    </div>
+                    </article>
                 </div>
-            </div>
+            </section>
 
             <div class="cta-section">
-                <p style="font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 2rem;">
+                <p class="cta-description">
                     Ready to carry the weight of the world across endless highways?
                 </p>
-                <a href="#" class="btn">Submit Application</a>
-                <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 2rem;">
+                <a href="#" class="btn" aria-label="Submit application to join Hyperion Logistics">Submit Application</a>
+                <p class="cta-note">
                     Questions? Contact us on Discord or check our Drivers Hub
                 </p>
             </div>
-        </div>
+        </main>
 
-        <footer>
+        <footer role="contentinfo">
             <p class="footer-text">© 2026 Hyperion Logistics VTC. All rights reserved.</p>
         </footer>
     </div>
+
+    <script>
+        // Mobile menu functionality
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        const mobileOverlay = document.querySelector('.mobile-overlay');
+        
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            const isExpanded = nav.classList.contains('active');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
+            menuToggle.textContent = isExpanded ? '✕' : '☰';
+        });
+
+        mobileOverlay.addEventListener('click', () => {
+            nav.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.textContent = '☰';
+        });
+
+        // Close mobile menu when clicking on nav links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    nav.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.textContent = '☰';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
