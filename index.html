@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hyperion Logistics - Virtual Trucking Company</title>
+    <meta name="description" content="Hyperion Logistics - Premier virtual trucking company for ETS2 and ATS. Join our professional community with custom job tracker, weekly convoys, and 24/7 support.">
+    <meta name="keywords" content="virtual trucking, VTC, ETS2, ATS, Euro Truck Simulator, American Truck Simulator, TruckersMP">
+    <meta name="theme-color" content="#00d4ff">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Hyperion Logistics - A Titan In Transit">
+    <meta property="og:description" content="Join the premier virtual trucking company. Professional operations, active community, custom job tracker.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/assets/og-image.jpg">
+    
+    <title>Hyperion Logistics - Premier Virtual Trucking Company | ETS2 & ATS</title>
+    
+    <!-- Preconnect to external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Optimized font loading with display swap -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
     <style>
         :root {
             --neon-blue: #00d4ff;
@@ -17,6 +35,7 @@
             --text-primary: #e8f0f8;
             --text-secondary: #8b9cb8;
             --accent-glow: rgba(0, 212, 255, 0.3);
+            --transition-speed: 0.3s;
         }
 
         * {
@@ -31,9 +50,11 @@
             color: var(--text-primary);
             overflow-x: hidden;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Animated background */
+        /* Optimized animated background with will-change */
         .background-grid {
             position: fixed;
             top: 0;
@@ -46,6 +67,8 @@
             background-size: 60px 60px;
             animation: gridMove 20s linear infinite;
             z-index: 0;
+            will-change: transform;
+            pointer-events: none;
         }
 
         @keyframes gridMove {
@@ -63,6 +86,8 @@
                         radial-gradient(circle at 70% 50%, rgba(255, 107, 53, 0.08) 0%, transparent 50%);
             animation: glowPulse 15s ease-in-out infinite;
             z-index: 0;
+            will-change: opacity;
+            pointer-events: none;
         }
 
         @keyframes glowPulse {
@@ -70,19 +95,45 @@
             50% { opacity: 0.6; }
         }
 
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         .content-wrapper {
             position: relative;
             z-index: 1;
         }
 
-        /* Header */
+        /* Skip to main content for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--neon-blue);
+            color: var(--darker-bg);
+            padding: 8px;
+            text-decoration: none;
+            z-index: 1000;
+            font-weight: bold;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Header with improved accessibility */
         header {
-            padding: 2rem 5%;
+            padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             backdrop-filter: blur(10px);
-            background: rgba(10, 14, 23, 0.8);
+            background: rgba(10, 14, 23, 0.95);
             border-bottom: 1px solid rgba(0, 212, 255, 0.2);
             position: sticky;
             top: 0;
@@ -97,7 +148,7 @@
 
         .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: 900;
             letter-spacing: 3px;
             background: linear-gradient(135deg, var(--neon-blue), var(--neon-orange));
@@ -106,6 +157,7 @@
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
             animation: logoGlow 3s ease-in-out infinite;
+            will-change: filter;
         }
 
         @keyframes logoGlow {
@@ -113,44 +165,67 @@
             50% { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8)); }
         }
 
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all var(--transition-speed);
+        }
+
+        .menu-toggle:hover {
+            background: var(--neon-blue);
+            color: var(--darker-bg);
+        }
+
         nav {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
+            align-items: center;
         }
 
         nav a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
             position: relative;
-            transition: color 0.3s;
+            transition: color var(--transition-speed);
+            padding: 0.5rem 0;
         }
 
         nav a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
             background: var(--neon-blue);
-            transition: width 0.3s;
+            transition: width var(--transition-speed);
         }
 
-        nav a:hover {
+        nav a:hover,
+        nav a:focus {
             color: var(--neon-blue);
+            outline: none;
         }
 
-        nav a:hover::after {
+        nav a:hover::after,
+        nav a:focus::after {
             width: 100%;
         }
 
-        /* Hero Section */
+        /* Hero Section with improved responsiveness */
         .hero {
-            padding: 8rem 5% 6rem;
+            padding: clamp(4rem, 10vh, 8rem) 5% clamp(3rem, 8vh, 6rem);
             text-align: center;
             animation: fadeIn 1s ease-out 0.3s both;
         }
@@ -162,11 +237,11 @@
 
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 5rem;
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 900;
             margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: clamp(2px, 1vw, 5px);
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--neon-blue) 100%);
             -webkit-background-clip: text;
             background-clip: text;
@@ -180,7 +255,7 @@
         }
 
         .hero .tagline {
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
             color: var(--neon-orange);
             font-weight: 600;
             letter-spacing: 2px;
@@ -189,23 +264,39 @@
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 2vw, 1.3rem);
             max-width: 800px;
-            margin: 0 auto 3rem;
+            margin: 0 auto 2rem;
             color: var(--text-secondary);
             animation: fadeIn 1s ease-out 0.9s both;
         }
 
+        .feature-highlight {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--neon-blue);
+            font-weight: 600;
+            margin-top: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: inline-block;
+            padding: 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
         .cta-buttons {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             justify-content: center;
+            flex-wrap: wrap;
             animation: fadeIn 1s ease-out 1.1s both;
+            margin-top: 2rem;
         }
 
         .btn {
-            padding: 1.2rem 3rem;
-            font-size: 1.2rem;
+            padding: 1rem 2.5rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -213,12 +304,18 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s;
+            transition: transform var(--transition-speed);
             font-family: 'Rajdhani', sans-serif;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .btn:hover {
+        .btn:hover,
+        .btn:focus {
             transform: translateY(-3px);
+            outline: 2px solid var(--neon-blue);
+            outline-offset: 2px;
         }
 
         .btn-primary {
@@ -251,17 +348,17 @@
 
         /* Features Section */
         .features {
-            padding: 6rem 5%;
+            padding: clamp(3rem, 8vh, 6rem) 5%;
             background: linear-gradient(180deg, transparent 0%, rgba(15, 25, 45, 0.3) 100%);
         }
 
         .section-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
+            font-size: clamp(2rem, 5vw, 3rem);
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: clamp(2px, 0.5vw, 4px);
             position: relative;
         }
 
@@ -277,14 +374,14 @@
         .section-title::before {
             content: '⚡ ';
             color: var(--neon-orange);
-            font-size: 2.5rem;
-            margin-right: 1rem;
+            font-size: 0.8em;
+            margin-right: 0.5rem;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 2rem;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -293,9 +390,9 @@
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 212, 255, 0.2);
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: 15px;
-            transition: all 0.4s;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
@@ -312,7 +409,8 @@
             transition: opacity 0.4s;
         }
 
-        .feature-card:hover {
+        .feature-card:hover,
+        .feature-card:focus-within {
             transform: translateY(-10px);
             border-color: var(--neon-blue);
             box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
@@ -323,14 +421,15 @@
         }
 
         .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 3rem;
+            margin-bottom: 1rem;
             display: block;
+            line-height: 1;
         }
 
         .feature-card h3 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
             margin-bottom: 1rem;
             color: var(--neon-blue);
             text-transform: uppercase;
@@ -339,13 +438,13 @@
 
         .feature-card p {
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 1.5vw, 1.1rem);
             line-height: 1.8;
         }
 
         /* Stats Section */
         .stats {
-            padding: 6rem 5%;
+            padding: clamp(3rem, 8vh, 6rem) 5%;
             background: rgba(5, 8, 16, 0.8);
             border-top: 1px solid rgba(0, 212, 255, 0.2);
             border-bottom: 1px solid rgba(0, 212, 255, 0.2);
@@ -366,7 +465,7 @@
 
         .stat-number {
             font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 900;
             background: linear-gradient(135deg, var(--neon-blue), var(--neon-orange));
             -webkit-background-clip: text;
@@ -374,10 +473,11 @@
             -webkit-text-fill-color: transparent;
             display: block;
             margin-bottom: 0.5rem;
+            line-height: 1;
         }
 
         .stat-label {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -386,7 +486,7 @@
 
         /* Footer */
         footer {
-            padding: 4rem 5% 2rem;
+            padding: 3rem 5% 2rem;
             text-align: center;
             background: var(--darker-bg);
             border-top: 1px solid rgba(0, 212, 255, 0.2);
@@ -397,153 +497,311 @@
             margin: 0 auto;
         }
 
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin: 2rem 0;
+            flex-wrap: wrap;
         }
 
         .social-links a {
             color: var(--text-secondary);
             font-size: 2rem;
-            transition: all 0.3s;
+            transition: all var(--transition-speed);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 212, 255, 0.2);
         }
 
-        .social-links a:hover {
+        .social-links a:hover,
+        .social-links a:focus {
             color: var(--neon-blue);
             transform: translateY(-5px);
             filter: drop-shadow(0 5px 10px rgba(0, 212, 255, 0.5));
+            border-color: var(--neon-blue);
+            outline: none;
         }
 
         .footer-text {
             color: var(--text-secondary);
             margin-top: 2rem;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
-        /* Responsive */
+        /* Mobile Navigation */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-
-            .hero .tagline {
-                font-size: 1.3rem;
+            .menu-toggle {
+                display: block;
             }
 
             nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(10, 14, 23, 0.98);
+                backdrop-filter: blur(20px);
                 flex-direction: column;
-                gap: 1rem;
+                justify-content: flex-start;
+                padding: 5rem 2rem 2rem;
+                gap: 1.5rem;
+                transition: right 0.4s ease;
+                border-left: 1px solid rgba(0, 212, 255, 0.2);
+                z-index: 99;
             }
 
-            .cta-buttons {
-                flex-direction: column;
+            nav.active {
+                right: 0;
             }
 
-            .section-title {
-                font-size: 2rem;
+            nav a {
+                font-size: 1.2rem;
+                padding: 1rem 0;
+                width: 100%;
+                text-align: left;
+                border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            }
+
+            .mobile-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 98;
+            }
+
+            .mobile-overlay.active {
+                display: block;
+            }
+
+            header {
+                padding: 1rem 5%;
+            }
+        }
+
+        /* Loading optimization */
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lazy-load.loaded {
+            opacity: 1;
+        }
+
+        /* Print styles */
+        @media print {
+            .background-grid,
+            .background-glow,
+            header,
+            .cta-buttons,
+            .social-links,
+            footer {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Skip to main content for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <div class="background-grid"></div>
     <div class="background-glow"></div>
     
     <div class="content-wrapper">
-        <header>
-            <div class="logo">Hyperion Logistics</div>
-            <nav>
+        <header role="banner">
+            <div class="logo" aria-label="Hyperion Logistics Home">Hyperion Logistics</div>
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <nav role="navigation" aria-label="Main navigation">
                 <a href="#home">Home</a>
                 <a href="#features">Features</a>
-                <a href="https://www.hyperionvtc.com/join.html" target="_blank">Join Us</a>
-                <a href="https://hub.hyperionvtc.com" target="_blank">Drivers Hub</a>
+                <a href="join.html">Join Us</a>
+                <a href="https://hub.hyperionvtc.com" target="_blank" rel="noopener noreferrer">Drivers Hub</a>
             </nav>
         </header>
 
-        <section class="hero" id="home">
-            <h1>Hyperion Logistics</h1>
-            <div class="tagline">A Titan In Transit</div>
-            <p>Join the premier virtual trucking company in Euro Truck Simulator 2 and American Truck Simulator. Experience professional logistics operations with a passionate community of drivers. Like the Titan of old, we carry the weight of the world across endless highways.</p>
-            <p style="font-size: 1.2rem; color: var(--neon-blue); font-weight: 600; margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 1.5px;">
-                🎯 Featuring our own next-generation custom built job tracker and drivers hub
-            </p>
-            <div class="cta-buttons">
-                <a href="join.html" class="btn btn-primary" style="text-decoration: none; display: inline-block;">Join the Fleet</a>
-                <button class="btn btn-secondary">View Requirements</button>
-            </div>
-        </section>
+        <div class="mobile-overlay"></div>
 
-        <section class="features" id="features">
-            <h2 class="section-title">Why Choose Hyperion?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">🚛</span>
-                    <h3>Professional Operations</h3>
-                    <p>Experience realistic trucking operations with organized convoys, scheduled routes, and professional dispatch systems.</p>
+        <main id="main-content">
+            <section class="hero" id="home">
+                <h1>Hyperion Logistics</h1>
+                <div class="tagline">A Titan In Transit</div>
+                <p>Join the premier virtual trucking company in Euro Truck Simulator 2 and American Truck Simulator. Experience professional logistics operations with a passionate community of drivers. Like the Titan of old, we carry the weight of the world across endless highways.</p>
+                <div class="feature-highlight" role="status">
+                    🎯 Featuring our own next-generation custom built job tracker and drivers hub
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">👥</span>
-                    <h3>Active Community</h3>
-                    <p>Join a friendly and active community of trucking enthusiasts. Regular events, convoys, and social gatherings.</p>
+                <div class="cta-buttons">
+                    <a href="join.html" class="btn btn-primary">Join the Fleet</a>
+                    <button class="btn btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">View Requirements</button>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🌅</span>
-                    <h3>Dawn to Dusk Operations</h3>
-                    <p>Named after the Titan of light, we illuminate the highways 24/7. Our drivers never sleep, carrying cargo from sunrise to sunset and beyond.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🏆</span>
-                    <h3>Competitive Events</h3>
-                    <p>Participate in weekly challenges, seasonal competitions, and special events with rewards and recognition.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">📊</span>
-                    <h3>Advanced Tracking</h3>
-                    <p>Track your progress, miles driven, and deliveries completed with our comprehensive statistics system.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🎮</span>
-                    <h3>Multi-Platform</h3>
-                    <p>Active on both Euro Truck Simulator 2 and American Truck Simulator with cross-platform events.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🌍</span>
-                    <h3>Global Pantheon</h3>
-                    <p>Connect with drivers from around the world. Our international network spans continents like the realm of the Titans - vast and boundless.</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="stats">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number">5+</span>
-                    <span class="stat-label">Weekly Convoys</span>
+            <section class="features" id="features">
+                <h2 class="section-title">Why Choose Hyperion?</h2>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <span class="feature-icon" aria-hidden="true">🚛</span>
+                        <h3>Professional Operations</h3>
+                        <p>Experience realistic trucking operations with organized convoys, scheduled routes, and professional dispatch systems.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-icon" aria-hidden="true">👥</span>
+                        <h3>Active Community</h3>
+                        <p>Join a friendly and active community of trucking enthusiasts. Regular events, convoys, and social gatherings.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-icon" aria-hidden="true">🌅</span>
+                        <h3>Dawn to Dusk Operations</h3>
+                        <p>Named after the Titan of light, we illuminate the highways 24/7. Our drivers never sleep, carrying cargo from sunrise to sunset and beyond.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-icon" aria-hidden="true">🏆</span>
+                        <h3>Competitive Events</h3>
+                        <p>Participate in weekly challenges, seasonal competitions, and special events with rewards and recognition.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-icon" aria-hidden="true">📊</span>
+                        <h3>Advanced Tracking</h3>
+                        <p>Track your progress, miles driven, and deliveries completed with our comprehensive statistics system.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-icon" aria-hidden="true">🎮</span>
+                        <h3>Multi-Platform</h3>
+                        <p>Active on both Euro Truck Simulator 2 and American Truck Simulator with cross-platform events.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-icon" aria-hidden="true">🌍</span>
+                        <h3>Global Pantheon</h3>
+                        <p>Connect with drivers from around the world. Our international network spans continents like the realm of the Titans - vast and boundless.</p>
+                    </article>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">Support</span>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <footer>
+            <section class="stats" aria-label="Company statistics">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">Weekly Convoys</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Support</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer role="contentinfo">
             <div class="footer-content">
-                <div class="logo" style="margin-bottom: 1rem;">Hyperion Logistics</div>
-                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem;">
+                <div class="footer-logo">Hyperion Logistics</div>
+                <p class="footer-description">
                     Your journey on the virtual highway starts here. Professional virtual trucking for ETS2 and ATS. Where titans of the road meet the call of the open highway.
                 </p>
-                <div class="social-links">
-                    <a href="#" title="Discord">💬</a>
-                    <a href="#" title="TruckersMP">🚚</a>
-                    <a href="#" title="Twitter">🐦</a>
-                    <a href="#" title="YouTube">📺</a>
-                </div>
+                <nav class="social-links" aria-label="Social media links">
+                    <a href="#" title="Discord" aria-label="Join us on Discord">💬</a>
+                    <a href="#" title="TruckersMP" aria-label="View our TruckersMP profile">🚚</a>
+                    <a href="#" title="Twitter" aria-label="Follow us on Twitter">🐦</a>
+                    <a href="#" title="YouTube" aria-label="Subscribe to our YouTube channel">📺</a>
+                </nav>
                 <p class="footer-text">© 2026 Hyperion Logistics VTC. All rights reserved.</p>
             </div>
         </footer>
     </div>
+
+    <!-- Mobile menu toggle script -->
+    <script>
+        // Mobile menu functionality
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        const mobileOverlay = document.querySelector('.mobile-overlay');
+        
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            const isExpanded = nav.classList.contains('active');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
+            menuToggle.textContent = isExpanded ? '✕' : '☰';
+        });
+
+        mobileOverlay.addEventListener('click', () => {
+            nav.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.textContent = '☰';
+        });
+
+        // Close mobile menu when clicking on nav links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    nav.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.textContent = '☰';
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add loaded class for fade-in animation
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.lazy-load').forEach(el => {
+                el.classList.add('loaded');
+            });
+        });
+    </script>
 </body>
 </html>
