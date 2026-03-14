@@ -1,807 +1,773 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hyperion Logistics - Premier virtual trucking company for ETS2 and ATS. Join our professional community with custom job tracker, weekly convoys, and 24/7 support.">
-    <meta name="keywords" content="virtual trucking, VTC, ETS2, ATS, Euro Truck Simulator, American Truck Simulator, TruckersMP">
-    <meta name="theme-color" content="#00d4ff">
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Hyperion Logistics - A Titan In Transit">
-    <meta property="og:description" content="Join the premier virtual trucking company. Professional operations, active community, custom job tracker.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="/assets/og-image.jpg">
-    
-    <title>Hyperion Logistics - Premier Virtual Trucking Company | ETS2 & ATS</title>
-    
-    <!-- Preconnect to external resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Optimized font loading with display swap -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
-    <style>
-        :root {
-            --neon-blue: #00d4ff;
-            --neon-orange: #ff6b35;
-            --dark-bg: #0a0e17;
-            --darker-bg: #050810;
-            --card-bg: rgba(15, 25, 45, 0.6);
-            --text-primary: #e8f0f8;
-            --text-secondary: #8b9cb8;
-            --accent-glow: rgba(0, 212, 255, 0.3);
-            --transition-speed: 0.3s;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Rajdhani', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Optimized animated background with will-change */
-        .background-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: gridMove 20s linear infinite;
-            z-index: 0;
-            will-change: transform;
-            pointer-events: none;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(60px, 60px); }
-        }
-
-        .background-glow {
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 50%, rgba(255, 107, 53, 0.08) 0%, transparent 50%);
-            animation: glowPulse 15s ease-in-out infinite;
-            z-index: 0;
-            will-change: opacity;
-            pointer-events: none;
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
-        }
-
-        /* Reduce motion for users who prefer it */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Skip to main content for accessibility */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--neon-blue);
-            color: var(--darker-bg);
-            padding: 8px;
-            text-decoration: none;
-            z-index: 1000;
-            font-weight: bold;
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* Header with improved accessibility */
-        header {
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-            background: rgba(10, 14, 23, 0.95);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            animation: slideDown 0.6s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            font-weight: 900;
-            letter-spacing: 3px;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-orange));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            animation: logoGlow 3s ease-in-out infinite;
-            will-change: filter;
-        }
-
-        @keyframes logoGlow {
-            0%, 100% { filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); }
-            50% { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8)); }
-        }
-
-        /* Mobile menu toggle */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: 2px solid var(--neon-blue);
-            color: var(--neon-blue);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 5px;
-            transition: all var(--transition-speed);
-        }
-
-        .menu-toggle:hover {
-            background: var(--neon-blue);
-            color: var(--darker-bg);
-        }
-
-        nav {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            position: relative;
-            transition: color var(--transition-speed);
-            padding: 0.5rem 0;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--neon-blue);
-            transition: width var(--transition-speed);
-        }
-
-        nav a:hover,
-        nav a:focus {
-            color: var(--neon-blue);
-            outline: none;
-        }
-
-        nav a:hover::after,
-        nav a:focus::after {
-            width: 100%;
-        }
-
-        /* Hero Section with improved responsiveness */
-        .hero {
-            padding: clamp(4rem, 10vh, 8rem) 5% clamp(3rem, 8vh, 6rem);
-            text-align: center;
-            animation: fadeIn 1s ease-out 0.3s both;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: clamp(2px, 1vw, 5px);
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--neon-blue) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: titleSlide 1s ease-out 0.5s both;
-        }
-
-        @keyframes titleSlide {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .hero .tagline {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--neon-orange);
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
-            animation: fadeIn 1s ease-out 0.7s both;
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            color: var(--text-secondary);
-            animation: fadeIn 1s ease-out 0.9s both;
-        }
-
-        .feature-highlight {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: var(--neon-blue);
-            font-weight: 600;
-            margin-top: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            display: inline-block;
-            padding: 1rem;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeIn 1s ease-out 1.1s both;
-            margin-top: 2rem;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: transform var(--transition-speed);
-            font-family: 'Rajdhani', sans-serif;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn:hover,
-        .btn:focus {
-            transform: translateY(-3px);
-            outline: 2px solid var(--neon-blue);
-            outline-offset: 2px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--neon-blue), #0099cc);
-            color: var(--darker-bg);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-        }
-
-        /* Features Section */
-        .features {
-            padding: clamp(3rem, 8vh, 6rem) 5%;
-            background: linear-gradient(180deg, transparent 0%, rgba(15, 25, 45, 0.3) 100%);
-        }
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 5vw, 3rem);
-            text-align: center;
-            margin-bottom: 3rem;
-            text-transform: uppercase;
-            letter-spacing: clamp(2px, 0.5vw, 4px);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-orange));
-            margin: 1rem auto 0;
-        }
-
-        .section-title::before {
-            content: '⚡ ';
-            color: var(--neon-orange);
-            font-size: 0.8em;
-            margin-right: 0.5rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            padding: 2rem;
-            border-radius: 15px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .feature-card:hover,
-        .feature-card:focus-within {
-            transform: translateY(-10px);
-            border-color: var(--neon-blue);
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-            line-height: 1;
-        }
-
-        .feature-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.2rem, 2vw, 1.6rem);
-            margin-bottom: 1rem;
-            color: var(--neon-blue);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            font-size: clamp(1rem, 1.5vw, 1.1rem);
-            line-height: 1.8;
-        }
-
-        /* Stats Section */
-        .stats {
-            padding: clamp(3rem, 8vh, 6rem) 5%;
-            background: rgba(5, 8, 16, 0.8);
-            border-top: 1px solid rgba(0, 212, 255, 0.2);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .stat-item {
-            position: relative;
-        }
-
-        .stat-number {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-orange));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: block;
-            margin-bottom: 0.5rem;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: clamp(1rem, 1.5vw, 1.2rem);
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
-
-        /* Footer */
-        footer {
-            padding: 3rem 5% 2rem;
-            text-align: center;
-            background: var(--darker-bg);
-            border-top: 1px solid rgba(0, 212, 255, 0.2);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-orange));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
-        .footer-description {
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .social-links a {
-            color: var(--text-secondary);
-            font-size: 2rem;
-            transition: all var(--transition-speed);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-        }
-
-        .social-links a:hover,
-        .social-links a:focus {
-            color: var(--neon-blue);
-            transform: translateY(-5px);
-            filter: drop-shadow(0 5px 10px rgba(0, 212, 255, 0.5));
-            border-color: var(--neon-blue);
-            outline: none;
-        }
-
-        .footer-text {
-            color: var(--text-secondary);
-            margin-top: 2rem;
-            font-size: 0.9rem;
-        }
-
-        /* Mobile Navigation */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            nav {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                max-width: 300px;
-                height: 100vh;
-                background: rgba(10, 14, 23, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                justify-content: flex-start;
-                padding: 5rem 2rem 2rem;
-                gap: 1.5rem;
-                transition: right 0.4s ease;
-                border-left: 1px solid rgba(0, 212, 255, 0.2);
-                z-index: 99;
-            }
-
-            nav.active {
-                right: 0;
-            }
-
-            nav a {
-                font-size: 1.2rem;
-                padding: 1rem 0;
-                width: 100%;
-                text-align: left;
-                border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-            }
-
-            .mobile-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: rgba(0, 0, 0, 0.7);
-                z-index: 98;
-            }
-
-            .mobile-overlay.active {
-                display: block;
-            }
-
-            header {
-                padding: 1rem 5%;
-            }
-        }
-
-        /* Loading optimization */
-        .lazy-load {
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .lazy-load.loaded {
-            opacity: 1;
-        }
-
-        /* Print styles */
-        @media print {
-            .background-grid,
-            .background-glow,
-            header,
-            .cta-buttons,
-            .social-links,
-            footer {
-                display: none;
-            }
-
-            body {
-                background: white;
-                color: black;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hyperion Logistics VTC</title>
+  <meta name="description" content="A premier Virtual Trucking Company for American Truck Simulator and Euro Truck Simulator 2. Apply to join Hyperion Logistics today." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --amber: #E8A020;
+      --amber-dim: #C4841A;
+      --bg: #080A0E;
+      --bg2: #0F1117;
+      --bg3: #16191F;
+      --border: rgba(255,255,255,0.07);
+      --text: #F0EEE8;
+      --muted: #7A7870;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.35;
+    }
+
+    /* Grid lines */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 64px;
+      background: rgba(8,10,14,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+
+    .nav-logo-mark {
+      width: 32px; height: 32px;
+      background: var(--amber);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-mark svg { width: 16px; height: 16px; }
+
+    .nav-wordmark {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      line-height: 1;
+    }
+    .nav-wordmark span {
+      display: block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--amber);
+      margin-top: 2px;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--amber) !important; color: #000 !important;
+      padding: 8px 20px !important; border-radius: 6px;
+      font-weight: 700 !important; letter-spacing: 0.08em !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--amber-dim) !important; }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 5vw 80px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 65% 50%, rgba(232,160,32,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 15% 80%, rgba(232,160,32,0.04) 0%, transparent 60%);
+    }
+
+    .hero-line {
+      position: absolute;
+      top: 0; right: 22vw;
+      width: 1px; height: 100%;
+      background: linear-gradient(to bottom, transparent, var(--amber) 30%, var(--amber) 70%, transparent);
+      opacity: 0.12;
+      transform: skewX(-6deg);
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 680px; }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--amber);
+      margin-bottom: 24px;
+    }
+    .hero-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--amber); }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(58px, 9vw, 100px);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    h1 em { font-style: normal; color: var(--amber); display: block; }
+
+    .hero-desc {
+      font-size: 17px; font-weight: 300;
+      color: rgba(240,238,232,0.6);
+      max-width: 460px; line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--amber); color: #000;
+      font-family: var(--font-display);
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px; border-radius: 6px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--amber-dim); transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--muted); font-size: 14px; font-weight: 500;
+      text-decoration: none; letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .btn-secondary:hover { color: var(--text); }
+    .btn-secondary span { transition: transform 0.2s; }
+    .btn-secondary:hover span { transform: translateX(4px); }
+
+    /* STATS STRIP */
+    .stats-strip {
+      position: relative; z-index: 2;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(15,17,23,0.7);
+      padding: 36px 5vw;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .stat-cell { background: var(--bg2); padding: 28px 32px; text-align: center; }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 44px; font-weight: 800;
+      color: var(--amber); line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat-value.loading {
+      color: var(--muted); font-size: 22px;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+    .stat-label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); margin-top: 6px;
+    }
+
+    /* SECTIONS */
+    section { padding: 100px 5vw; position: relative; z-index: 2; }
+
+    .section-tag {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--amber); }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 0.95;
+      margin-bottom: 24px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1100px;
+    }
+
+    .about-body {
+      font-size: 16px; font-weight: 300;
+      color: rgba(240,238,232,0.6);
+      line-height: 1.8; margin-bottom: 20px;
+    }
+
+    .about-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 40px;
+    }
+
+    .pillar {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+    .pillar:hover { border-color: rgba(232,160,32,0.3); }
+    .pillar-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text); margin-bottom: 4px;
+    }
+    .pillar-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    .games-strip { display: flex; gap: 10px; margin-top: 32px; flex-wrap: wrap; }
+    .game-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 6px;
+      font-family: var(--font-display);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .game-badge.ats { background: rgba(232,160,32,0.1); color: var(--amber); border: 1px solid rgba(232,160,32,0.22); }
+    .game-badge.ets { background: rgba(96,165,250,0.08); color: #60A5FA; border: 1px solid rgba(96,165,250,0.18); }
+
+    /* SCREENSHOTS */
+    .screenshots { background: var(--bg2); }
+
+    .screenshots-intro { max-width: 500px; margin-bottom: 52px; }
+    .screenshots-intro p {
+      font-size: 16px; font-weight: 300;
+      color: rgba(240,238,232,0.55); line-height: 1.75;
+    }
+
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 14px;
+      max-width: 1100px;
+    }
+
+    .screenshot-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .screenshot-card:hover { border-color: rgba(232,160,32,0.22); transform: translateY(-2px); }
+    .screenshot-card.large { grid-row: span 2; }
+
+    .screenshot-mockup {
+      width: 100%; aspect-ratio: 16/10;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      border-bottom: 1px solid var(--border);
+      padding: 12px;
+    }
+    .screenshot-card.large .screenshot-mockup { aspect-ratio: 4/5; }
+
+    .mock-ui { width: 100%; height: 100%; display: flex; flex-direction: column; gap: 6px; }
+
+    .mock-topbar {
+      height: 24px;
+      background: rgba(255,255,255,0.035);
+      border-radius: 4px;
+      display: flex; align-items: center; gap: 5px; padding: 0 8px;
+      flex-shrink: 0;
+    }
+    .mock-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .mock-dot.r { background: #F87171; } .mock-dot.y { background: var(--amber); } .mock-dot.g { background: #34D399; }
+
+    .mock-body { flex: 1; display: flex; gap: 6px; min-height: 0; }
+
+    .mock-sidebar {
+      width: 26%; background: rgba(255,255,255,0.025);
+      border-radius: 4px; padding: 8px 6px;
+      display: flex; flex-direction: column; gap: 4px; flex-shrink: 0;
+    }
+    .mock-nav-item { height: 16px; border-radius: 3px; background: rgba(255,255,255,0.04); }
+    .mock-nav-item.active { background: rgba(232,160,32,0.14); }
+
+    .mock-main { flex: 1; display: flex; flex-direction: column; gap: 6px; min-height: 0; }
+
+    .mock-stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 5px; height: 38px; flex-shrink: 0; }
+    .mock-stat {
+      background: rgba(255,255,255,0.035);
+      border-radius: 4px; border: 1px solid rgba(255,255,255,0.04);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mock-stat-val { width: 42%; height: 7px; background: var(--amber); border-radius: 2px; opacity: 0.55; }
+
+    .mock-card { background: rgba(255,255,255,0.025); border-radius: 4px; flex: 1; min-height: 0; overflow: hidden; }
+    .mock-table-row { height: 12px; background: rgba(255,255,255,0.025); border-radius: 2px; margin: 5px 8px; }
+    .mock-table-row:nth-child(2n) { opacity: 0.55; }
+
+    .mock-lb-row {
+      display: flex; align-items: center; gap: 6px;
+      padding: 5px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .mock-rank { width: 14px; height: 7px; background: rgba(232,160,32,0.35); border-radius: 2px; flex-shrink: 0; }
+    .mock-avatar { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.08); flex-shrink: 0; }
+    .mock-name { flex:1; height: 6px; background: rgba(255,255,255,0.07); border-radius: 2px; }
+    .mock-xp { width: 26px; height: 6px; background: rgba(232,160,32,0.22); border-radius: 2px; flex-shrink: 0; }
+
+    .screenshot-label { padding: 16px 20px; }
+    .screenshot-title {
+      font-family: var(--font-display);
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text); margin-bottom: 3px;
+    }
+    .screenshot-desc { font-size: 12px; color: var(--muted); }
+
+    /* JOIN */
+    .join-section {
+      background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%);
+      border-top: 1px solid var(--border);
+    }
+    .join-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .join-inner h2 { margin-bottom: 20px; }
+    .join-inner > p {
+      font-size: 16px; font-weight: 300;
+      color: rgba(240,238,232,0.55); line-height: 1.75;
+      margin-bottom: 48px;
+    }
+
+    .join-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 48px; text-align: left; }
+
+    .join-step {
+      padding: 24px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 38px; font-weight: 800;
+      color: rgba(232,160,32,0.14);
+      line-height: 1; margin-bottom: 12px;
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .step-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 2;
+    }
+    .footer-left {
+      font-family: var(--font-display);
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .footer-right { display: flex; align-items: center; gap: 20px; }
+    .footer-right a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-right a:hover { color: var(--text); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { opacity: 0; animation: fadeUp 0.65s ease forwards; }
+    .fade-up:nth-child(1) { animation-delay: 0.1s; }
+    .fade-up:nth-child(2) { animation-delay: 0.22s; }
+    .fade-up:nth-child(3) { animation-delay: 0.36s; }
+    .fade-up:nth-child(4) { animation-delay: 0.5s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .screenshots-grid { grid-template-columns: 1fr; }
+      .screenshot-card.large { grid-row: span 1; }
+      .screenshot-card.large .screenshot-mockup { aspect-ratio: 16/10; }
+      .join-steps { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 14px; text-align: center; }
+      .mock-sidebar { display: none; }
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Skip to main content for screen readers -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <div class="background-grid"></div>
-    <div class="background-glow"></div>
-    
-    <div class="content-wrapper">
-        <header role="banner">
-            <div class="logo" aria-label="Hyperion Logistics Home">Hyperion Logistics</div>
-            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-            <nav role="navigation" aria-label="Main navigation">
-                <a href="#home">Home</a>
-                <a href="#features">Features</a>
-                <a href="join.html">Join Us</a>
-                <a href="https://hub.hyperionvtc.com" target="_blank" rel="noopener noreferrer">Drivers Hub</a>
-            </nav>
-        </header>
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/>
+        <circle cx="5.5" cy="18.5" r="1.5"/><circle cx="18.5" cy="18.5" r="1.5"/>
+      </svg>
+    </div>
+    <div class="nav-wordmark">Hyperion<span>Logistics VTC</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#hub">The Hub</a></li>
+    <li><a href="#join">Join</a></li>
+    <li><a href="https://drivers.hyperionvtc.com" target="_blank">Drivers Hub</a></li>
+    <li><a href="https://drivers.hyperionvtc.com/apply" class="nav-cta">Apply Now</a></li>
+  </ul>
+</nav>
 
-        <div class="mobile-overlay"></div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-tag fade-up">Virtual Trucking Company · ATS &amp; ETS2</div>
+    <h1 class="fade-up">Built for<br><em>the road.</em></h1>
+    <p class="hero-desc fade-up">Hyperion Logistics is a community-driven VTC operating across American and Euro Truck Simulator. Join a crew of dedicated drivers, track your career, and haul together.</p>
+    <div class="hero-actions fade-up">
+      <a href="https://drivers.hyperionvtc.com/apply" class="btn-primary">
+        Apply to Join
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#about" class="btn-secondary">Learn more <span>→</span></a>
+    </div>
+  </div>
+</section>
 
-        <main id="main-content">
-            <section class="hero" id="home">
-                <h1>Hyperion Logistics</h1>
-                <div class="tagline">A Titan In Transit</div>
-                <p>Join the premier virtual trucking company in Euro Truck Simulator 2 and American Truck Simulator. Experience professional logistics operations with a passionate community of drivers. Like the Titan of old, we carry the weight of the world across endless highways.</p>
-                <div class="feature-highlight" role="status">
-                    🎯 Featuring our own next-generation custom built job tracker and drivers hub
-                </div>
-                <div class="cta-buttons">
-                    <a href="join.html" class="btn btn-primary">Join the Fleet</a>
-                    <button class="btn btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">View Requirements</button>
-                </div>
-            </section>
+<!-- LIVE STATS -->
+<div class="stats-strip">
+  <div class="stats-grid">
+    <div class="stat-cell">
+      <div class="stat-value loading" id="stat-members">—</div>
+      <div class="stat-label">Active Drivers</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-value loading" id="stat-jobs">—</div>
+      <div class="stat-label">Jobs Completed</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-value loading" id="stat-distance">—</div>
+      <div class="stat-label">Kilometres Driven</div>
+    </div>
+  </div>
+</div>
 
-            <section class="features" id="features">
-                <h2 class="section-title">Why Choose Hyperion?</h2>
-                <div class="features-grid">
-                    <article class="feature-card">
-                        <span class="feature-icon" aria-hidden="true">🚛</span>
-                        <h3>Professional Operations</h3>
-                        <p>Experience realistic trucking operations with organized convoys, scheduled routes, and professional dispatch systems.</p>
-                    </article>
-                    <article class="feature-card">
-                        <span class="feature-icon" aria-hidden="true">👥</span>
-                        <h3>Active Community</h3>
-                        <p>Join a friendly and active community of trucking enthusiasts. Regular events, convoys, and social gatherings.</p>
-                    </article>
-                    <article class="feature-card">
-                        <span class="feature-icon" aria-hidden="true">🌅</span>
-                        <h3>Dawn to Dusk Operations</h3>
-                        <p>Named after the Titan of light, we illuminate the highways 24/7. Our drivers never sleep, carrying cargo from sunrise to sunset and beyond.</p>
-                    </article>
-                    <article class="feature-card">
-                        <span class="feature-icon" aria-hidden="true">🏆</span>
-                        <h3>Competitive Events</h3>
-                        <p>Participate in weekly challenges, seasonal competitions, and special events with rewards and recognition.</p>
-                    </article>
-                    <article class="feature-card">
-                        <span class="feature-icon" aria-hidden="true">📊</span>
-                        <h3>Advanced Tracking</h3>
-                        <p>Track your progress, miles driven, and deliveries completed with our comprehensive statistics system.</p>
-                    </article>
-                    <article class="feature-card">
-                        <span class="feature-icon" aria-hidden="true">🎮</span>
-                        <h3>Multi-Platform</h3>
-                        <p>Active on both Euro Truck Simulator 2 and American Truck Simulator with cross-platform events.</p>
-                    </article>
-                    <article class="feature-card">
-                        <span class="feature-icon" aria-hidden="true">🌍</span>
-                        <h3>Global Pantheon</h3>
-                        <p>Connect with drivers from around the world. Our international network spans continents like the realm of the Titans - vast and boundless.</p>
-                    </article>
-                </div>
-            </section>
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-tag">Who we are</div>
+      <h2>More than a<br>trucking sim.</h2>
+      <p class="about-body">Hyperion Logistics is a Virtual Trucking Company built around community, consistency, and the open road. We run convoys, track careers, celebrate milestones, and grow together as drivers across ATS and ETS2.</p>
+      <p class="about-body">Whether you're hauling solo or rolling with the crew on a convoy, Hyperion gives you the tools to track every kilometre, earn XP, unlock achievements, and climb the ranks.</p>
+      <div class="games-strip">
+        <span class="game-badge ats">🇺🇸 American Truck Simulator</span>
+        <span class="game-badge ets">🇪🇺 Euro Truck Simulator 2</span>
+      </div>
+    </div>
+    <div class="about-pillars">
+      <div class="pillar">
+        <span class="pillar-icon">🚛</span>
+        <div class="pillar-title">Job Tracking</div>
+        <div class="pillar-body">Every delivery logged automatically via Trucky integration.</div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">⚡</span>
+        <div class="pillar-title">XP &amp; Ranks</div>
+        <div class="pillar-body">Earn points, unlock achievements, and climb from Rookie to Legend.</div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🎯</span>
+        <div class="pillar-title">Challenges</div>
+        <div class="pillar-body">Monthly challenges with bonus XP rewards for top performers.</div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">📅</span>
+        <div class="pillar-title">Convoys</div>
+        <div class="pillar-body">Regular organized events across both simulators.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <section class="stats" aria-label="Company statistics">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-number">5+</span>
-                        <span class="stat-label">Weekly Convoys</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">24/7</span>
-                        <span class="stat-label">Support</span>
-                    </div>
-                </div>
-            </section>
-        </main>
+<!-- SCREENSHOTS -->
+<section id="hub" class="screenshots">
+  <div class="screenshots-intro">
+    <div class="section-tag">The Drivers Hub</div>
+    <h2>Your career,<br>in one place.</h2>
+    <p>A custom-built portal where you track jobs, climb the leaderboard, manage your profile, and watch your rank progress — all in real time.</p>
+  </div>
+  <div class="screenshots-grid">
 
-        <footer role="contentinfo">
-            <div class="footer-content">
-                <div class="footer-logo">Hyperion Logistics</div>
-                <p class="footer-description">
-                    Your journey on the virtual highway starts here. Professional virtual trucking for ETS2 and ATS. Where titans of the road meet the call of the open highway.
-                </p>
-                <nav class="social-links" aria-label="Social media links">
-                    <a href="#" title="Discord" aria-label="Join us on Discord">💬</a>
-                    <a href="#" title="TruckersMP" aria-label="View our TruckersMP profile">🚚</a>
-                    <a href="#" title="Twitter" aria-label="Follow us on Twitter">🐦</a>
-                    <a href="#" title="YouTube" aria-label="Subscribe to our YouTube channel">📺</a>
-                </nav>
-                <p class="footer-text">© 2026 Hyperion Logistics VTC. All rights reserved.</p>
+    <!-- Dashboard (large) -->
+    <div class="screenshot-card large">
+      <div class="screenshot-mockup">
+        <div class="mock-ui">
+          <div class="mock-topbar"><div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div></div>
+          <div class="mock-body">
+            <div class="mock-sidebar">
+              <div class="mock-nav-item active"></div>
+              <div class="mock-nav-item"></div><div class="mock-nav-item"></div>
+              <div class="mock-nav-item"></div><div class="mock-nav-item"></div>
+              <div class="mock-nav-item"></div>
             </div>
-        </footer>
+            <div class="mock-main">
+              <div style="height:36px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.12);border-radius:4px;flex-shrink:0;display:flex;align-items:center;gap:16px;padding:0 10px;">
+                <div style="width:14%;height:7px;background:rgba(232,160,32,0.3);border-radius:2px;"></div>
+                <div style="width:14%;height:7px;background:rgba(255,255,255,0.08);border-radius:2px;"></div>
+                <div style="width:14%;height:7px;background:rgba(255,255,255,0.08);border-radius:2px;"></div>
+                <div style="width:14%;height:7px;background:rgba(255,255,255,0.08);border-radius:2px;"></div>
+              </div>
+              <div class="mock-stats-row">
+                <div class="mock-stat"><div class="mock-stat-val"></div></div>
+                <div class="mock-stat"><div class="mock-stat-val" style="background:#60A5FA"></div></div>
+                <div class="mock-stat"><div class="mock-stat-val" style="background:#34D399"></div></div>
+              </div>
+              <div class="mock-card" style="flex:2">
+                <div class="mock-table-row" style="width:88%"></div>
+                <div class="mock-table-row" style="width:72%"></div>
+                <div class="mock-table-row" style="width:91%"></div>
+                <div class="mock-table-row" style="width:64%"></div>
+                <div class="mock-table-row" style="width:82%"></div>
+                <div class="mock-table-row" style="width:76%"></div>
+              </div>
+              <div class="mock-card"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">
+        <div class="screenshot-title">Dashboard</div>
+        <div class="screenshot-desc">VTC-wide stats, recent jobs, upcoming events and onboarding progress at a glance</div>
+      </div>
     </div>
 
-    <!-- Mobile menu toggle script -->
-    <script>
-        // Mobile menu functionality
-        const menuToggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('nav');
-        const mobileOverlay = document.querySelector('.mobile-overlay');
-        
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            mobileOverlay.classList.toggle('active');
-            const isExpanded = nav.classList.contains('active');
-            menuToggle.setAttribute('aria-expanded', isExpanded);
-            menuToggle.textContent = isExpanded ? '✕' : '☰';
-        });
+    <!-- Leaderboard -->
+    <div class="screenshot-card">
+      <div class="screenshot-mockup">
+        <div class="mock-ui">
+          <div class="mock-topbar"><div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div></div>
+          <div class="mock-body" style="flex-direction:column;padding:6px 0;">
+            <div class="mock-lb-row"><div class="mock-rank" style="background:rgba(255,215,0,0.55)"></div><div class="mock-avatar"></div><div class="mock-name"></div><div class="mock-xp"></div></div>
+            <div class="mock-lb-row"><div class="mock-rank" style="background:rgba(192,192,192,0.4)"></div><div class="mock-avatar"></div><div class="mock-name" style="width:55%"></div><div class="mock-xp"></div></div>
+            <div class="mock-lb-row"><div class="mock-rank" style="background:rgba(205,127,50,0.4)"></div><div class="mock-avatar"></div><div class="mock-name" style="width:70%"></div><div class="mock-xp"></div></div>
+            <div class="mock-lb-row"><div class="mock-rank"></div><div class="mock-avatar"></div><div class="mock-name" style="width:48%"></div><div class="mock-xp"></div></div>
+            <div class="mock-lb-row"><div class="mock-rank"></div><div class="mock-avatar"></div><div class="mock-name" style="width:65%"></div><div class="mock-xp"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">
+        <div class="screenshot-title">Leaderboard</div>
+        <div class="screenshot-desc">Compete on XP, distance, and jobs — all time or this month</div>
+      </div>
+    </div>
 
-        mobileOverlay.addEventListener('click', () => {
-            nav.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.textContent = '☰';
-        });
+    <!-- Achievements -->
+    <div class="screenshot-card">
+      <div class="screenshot-mockup">
+        <div class="mock-ui">
+          <div class="mock-topbar"><div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div></div>
+          <div class="mock-body" style="flex-direction:column;gap:7px;padding:4px 0;">
+            <div style="background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.14);border-radius:5px;padding:9px;display:flex;align-items:center;gap:9px;flex-shrink:0;">
+              <div style="width:26px;height:26px;border-radius:6px;background:rgba(232,160,32,0.14);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">⭐</div>
+              <div style="flex:1;">
+                <div style="height:5px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:4px;"><div style="width:65%;height:100%;background:var(--amber);border-radius:3px;"></div></div>
+                <div style="height:4px;width:55%;background:rgba(255,255,255,0.05);border-radius:2px;"></div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;flex:1;">
+              <div style="background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.14);border-radius:5px;padding:7px;display:flex;gap:5px;align-items:center;">
+                <span style="font-size:14px;">🚛</span>
+                <div style="flex:1;"><div style="height:5px;background:rgba(255,255,255,0.1);border-radius:2px;width:75%;margin-bottom:3px;"></div><div style="height:3px;background:rgba(232,160,32,0.28);border-radius:2px;width:45%;"></div></div>
+              </div>
+              <div style="background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.14);border-radius:5px;padding:7px;display:flex;gap:5px;align-items:center;">
+                <span style="font-size:14px;">🗺️</span>
+                <div style="flex:1;"><div style="height:5px;background:rgba(255,255,255,0.1);border-radius:2px;width:60%;margin-bottom:3px;"></div><div style="height:3px;background:rgba(232,160,32,0.28);border-radius:2px;width:38%;"></div></div>
+              </div>
+              <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:5px;padding:7px;opacity:0.38;display:flex;gap:5px;align-items:center;">
+                <span style="font-size:14px;filter:grayscale(1)">💎</span>
+                <div style="flex:1;"><div style="height:5px;background:rgba(255,255,255,0.07);border-radius:2px;width:68%;margin-bottom:3px;"></div><div style="height:3px;background:rgba(255,255,255,0.05);border-radius:2px;width:50%;"></div></div>
+              </div>
+              <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:5px;padding:7px;opacity:0.38;display:flex;gap:5px;align-items:center;">
+                <span style="font-size:14px;filter:grayscale(1)">👑</span>
+                <div style="flex:1;"><div style="height:5px;background:rgba(255,255,255,0.07);border-radius:2px;width:50%;margin-bottom:3px;"></div><div style="height:3px;background:rgba(255,255,255,0.05);border-radius:2px;width:42%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">
+        <div class="screenshot-title">Achievements &amp; XP</div>
+        <div class="screenshot-desc">Track rank progression and unlock badges as you hit milestones</div>
+      </div>
+    </div>
 
-        // Close mobile menu when clicking on nav links
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    nav.classList.remove('active');
-                    mobileOverlay.classList.remove('active');
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                    menuToggle.textContent = '☰';
-                }
-            });
-        });
+  </div>
+</section>
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#' && href.length > 1) {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            });
-        });
+<!-- JOIN -->
+<section id="join" class="join-section">
+  <div class="join-inner">
+    <div class="section-tag" style="justify-content:center;">How to join</div>
+    <h2>Ready to haul<br>with Hyperion?</h2>
+    <p>Applying takes less than 5 minutes. Fill out a short form, get reviewed by our team, and you'll be on the road with us in no time.</p>
+    <div class="join-steps">
+      <div class="join-step">
+        <div class="step-num">01</div>
+        <div class="step-title">Apply</div>
+        <div class="step-body">Fill out our short application form. Tell us a bit about yourself and your trucking experience.</div>
+      </div>
+      <div class="join-step">
+        <div class="step-num">02</div>
+        <div class="step-title">Get Reviewed</div>
+        <div class="step-body">Our staff reviews your application and reaches out via Discord DM.</div>
+      </div>
+      <div class="join-step">
+        <div class="step-num">03</div>
+        <div class="step-title">Start Hauling</div>
+        <div class="step-body">Sign into the Drivers Hub, install Trucky, and your career begins.</div>
+      </div>
+    </div>
+    <a href="https://drivers.hyperionvtc.com/apply" class="btn-primary" style="font-size:16px;padding:16px 44px;">
+      Apply Now
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
 
-        // Add loaded class for fade-in animation
-        window.addEventListener('load', () => {
-            document.querySelectorAll('.lazy-load').forEach(el => {
-                el.classList.add('loaded');
-            });
-        });
-    </script>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 Hyperion Logistics VTC</div>
+  <div class="footer-right">
+    <a href="https://drivers.hyperionvtc.com" target="_blank">Drivers Hub</a>
+    <a href="https://drivers.hyperionvtc.com/apply">Apply</a>
+  </div>
+</footer>
+
+<script>
+  // Live stats from hub API
+  async function loadStats() {
+    try {
+      const res = await fetch('https://drivers.hyperionvtc.com/api/public/stats');
+      const data = await res.json();
+      const fmt = (n) => n >= 1000 ? (n/1000).toFixed(1)+'K' : String(n);
+      const set = (id, val) => {
+        const el = document.getElementById(id);
+        el.textContent = val;
+        el.classList.remove('loading');
+      };
+      set('stat-members', data.members);
+      set('stat-jobs', fmt(data.jobs));
+      set('stat-distance', fmt(data.distanceKm));
+    } catch(e) {
+      ['stat-members','stat-jobs','stat-distance'].forEach(id => {
+        const el = document.getElementById(id);
+        el.textContent = '—';
+        el.classList.remove('loading');
+      });
+    }
+  }
+  loadStats();
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.pillar, .screenshot-card, .join-step').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
