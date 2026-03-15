@@ -3,477 +3,193 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hyperion Logistics VTC</title>
-  <meta name="description" content="A premier Virtual Trucking Company for American Truck Simulator and Euro Truck Simulator 2. Apply to join Hyperion Logistics today." />
+  <title>Hyperion Logistics VTC — ATS & ETS2</title>
+  <meta name="description" content="A community-driven Virtual Trucking Company for ATS and ETS2. XP ranks, achievements, divisions, convoy events and more. Apply free today." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --amber: #E8A020;
-      --amber-dim: #C4841A;
-      --bg: #080A0E;
-      --bg2: #0F1117;
-      --bg3: #16191F;
-      --border: rgba(255,255,255,0.07);
-      --text: #F0EEE8;
-      --muted: #7A7870;
-      --font-display: 'Barlow Condensed', sans-serif;
-      --font-body: 'Barlow', sans-serif;
+      --amber: #E8A020; --amber-dim: #C4841A; --amber-glow: rgba(232,160,32,0.12);
+      --bg: #080A0E; --bg2: #0F1117; --bg3: #16191F; --bg4: #1C1F27;
+      --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.04);
+      --text: #F0EEE8; --muted: #7A7870; --subtle: #3A3C44;
+      --green: #34D399; --blue: #60A5FA; --purple: #C084FC;
+      --font-d: 'Barlow Condensed', sans-serif;
+      --font-b: 'Barlow', sans-serif;
     }
-
     html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); font-weight: 400; line-height: 1.6; overflow-x: hidden; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-weight: 400;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* Noise overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1000;
-      opacity: 0.35;
-    }
-
-    /* Grid lines */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-      z-index: 0;
-    }
+    /* Noise + grid */
+    body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; opacity:0.35; }
+    body::after { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px); background-size:60px 60px; pointer-events:none; z-index:0; }
 
     /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 5vw;
-      height: 64px;
-      background: rgba(8,10,14,0.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-
-    .nav-logo-mark {
-      width: 32px; height: 32px;
-      background: var(--amber);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .nav-logo-mark svg { width: 16px; height: 16px; }
-
-    .nav-wordmark {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 17px;
-      letter-spacing: 0.12em;
-      color: var(--text);
-      line-height: 1;
-    }
-    .nav-wordmark span {
-      display: block;
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      color: var(--amber);
-      margin-top: 2px;
-    }
-
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-    .nav-links a {
-      font-size: 13px; font-weight: 500;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-cta {
-      background: var(--amber) !important; color: #000 !important;
-      padding: 8px 20px !important; border-radius: 6px;
-      font-weight: 700 !important; letter-spacing: 0.08em !important;
-      transition: background 0.2s !important;
-    }
-    .nav-cta:hover { background: var(--amber-dim) !important; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 5vw; height:64px; background:rgba(8,10,14,0.9); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
+    .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .nav-logo-mark { width:32px; height:32px; background:var(--amber); border-radius:8px; display:flex; align-items:center; justify-content:center; }
+    .nav-logo-mark svg { width:16px; height:16px; }
+    .nav-wordmark { font-family:var(--font-d); font-weight:800; font-size:17px; letter-spacing:0.12em; color:var(--text); line-height:1; }
+    .nav-wordmark span { display:block; font-size:9px; font-weight:600; letter-spacing:0.2em; color:var(--amber); margin-top:2px; }
+    .nav-links { display:flex; align-items:center; gap:24px; list-style:none; }
+    .nav-links a { font-size:13px; font-weight:500; color:var(--muted); text-decoration:none; letter-spacing:0.05em; text-transform:uppercase; transition:color 0.2s; }
+    .nav-links a:hover { color:var(--text); }
+    .nav-cta { background:var(--amber)!important; color:#000!important; padding:8px 20px!important; border-radius:6px; font-weight:700!important; }
+    .nav-cta:hover { background:var(--amber-dim)!important; }
 
     /* HERO */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 120px 5vw 80px;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 65% 50%, rgba(232,160,32,0.07) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 15% 80%, rgba(232,160,32,0.04) 0%, transparent 60%);
-    }
-
-    .hero-line {
-      position: absolute;
-      top: 0; right: 22vw;
-      width: 1px; height: 100%;
-      background: linear-gradient(to bottom, transparent, var(--amber) 30%, var(--amber) 70%, transparent);
-      opacity: 0.12;
-      transform: skewX(-6deg);
-    }
-
-    .hero-content { position: relative; z-index: 2; max-width: 680px; }
-
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--amber);
-      margin-bottom: 24px;
-    }
-    .hero-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--amber); }
-
-    h1 {
-      font-family: var(--font-display);
-      font-size: clamp(58px, 9vw, 100px);
-      font-weight: 800;
-      line-height: 0.9;
-      letter-spacing: -0.01em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-    h1 em { font-style: normal; color: var(--amber); display: block; }
-
-    .hero-desc {
-      font-size: 17px; font-weight: 300;
-      color: rgba(240,238,232,0.6);
-      max-width: 460px; line-height: 1.75;
-      margin-bottom: 40px;
-    }
-
-    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--amber); color: #000;
-      font-family: var(--font-display);
-      font-size: 15px; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      text-decoration: none;
-      padding: 14px 32px; border-radius: 6px;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-primary:hover { background: var(--amber-dim); transform: translateY(-1px); }
-
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 6px;
-      color: var(--muted); font-size: 14px; font-weight: 500;
-      text-decoration: none; letter-spacing: 0.05em;
-      transition: color 0.2s;
-    }
-    .btn-secondary:hover { color: var(--text); }
-    .btn-secondary span { transition: transform 0.2s; }
-    .btn-secondary:hover span { transform: translateX(4px); }
+    .hero { position:relative; min-height:100vh; display:flex; align-items:center; padding:120px 5vw 80px; overflow:hidden; }
+    .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 65% 50%,rgba(232,160,32,0.07) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 15% 80%,rgba(232,160,32,0.04) 0%,transparent 60%); }
+    .hero-line { position:absolute; top:0; right:22vw; width:1px; height:100%; background:linear-gradient(to bottom,transparent,var(--amber) 30%,var(--amber) 70%,transparent); opacity:0.1; transform:skewX(-6deg); }
+    .hero-content { position:relative; z-index:2; max-width:680px; }
+    .hero-tag { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); margin-bottom:24px; }
+    .hero-tag::before { content:''; display:block; width:28px; height:1px; background:var(--amber); }
+    h1 { font-family:var(--font-d); font-size:clamp(58px,9vw,100px); font-weight:800; line-height:0.9; letter-spacing:-0.01em; text-transform:uppercase; margin-bottom:28px; }
+    h1 em { font-style:normal; color:var(--amber); display:block; }
+    .hero-desc { font-size:17px; font-weight:300; color:rgba(240,238,232,0.6); max-width:460px; line-height:1.75; margin-bottom:40px; }
+    .hero-actions { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+    .btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--amber); color:#000; font-family:var(--font-d); font-size:15px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; padding:14px 32px; border-radius:6px; transition:background 0.2s,transform 0.15s; }
+    .btn-primary:hover { background:var(--amber-dim); transform:translateY(-1px); }
+    .btn-secondary { display:inline-flex; align-items:center; gap:6px; color:var(--muted); font-size:14px; font-weight:500; text-decoration:none; transition:color 0.2s; }
+    .btn-secondary:hover { color:var(--text); }
+    .btn-secondary span { transition:transform 0.2s; }
+    .btn-secondary:hover span { transform:translateX(4px); }
 
     /* STATS STRIP */
-    .stats-strip {
-      position: relative; z-index: 2;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: rgba(15,17,23,0.7);
-      padding: 36px 5vw;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .stat-cell { background: var(--bg2); padding: 28px 32px; text-align: center; }
-
-    .stat-value {
-      font-family: var(--font-display);
-      font-size: 44px; font-weight: 800;
-      color: var(--amber); line-height: 1;
-      letter-spacing: -0.02em;
-    }
-    .stat-value.loading {
-      color: var(--muted); font-size: 22px;
-      animation: pulse 1.4s ease-in-out infinite;
-    }
+    .stats-strip { position:relative; z-index:2; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:rgba(15,17,23,0.7); padding:36px 5vw; }
+    .stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:640px; margin:0 auto; }
+    .stat-cell { background:var(--bg2); padding:28px 32px; text-align:center; }
+    .stat-value { font-family:var(--font-d); font-size:44px; font-weight:800; color:var(--amber); line-height:1; letter-spacing:-0.02em; }
+    .stat-value.loading { color:var(--muted); font-size:22px; animation:pulse 1.4s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-
-    .stat-label {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--muted); margin-top: 6px;
-    }
+    .stat-label { font-size:11px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:6px; }
 
     /* SECTIONS */
-    section { padding: 100px 5vw; position: relative; z-index: 2; }
+    section { padding:80px 5vw; position:relative; z-index:2; }
+    .section-tag { font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+    .section-tag::before { content:''; display:block; width:24px; height:1px; background:var(--amber); }
+    h2 { font-family:var(--font-d); font-size:clamp(32px,5vw,52px); font-weight:800; text-transform:uppercase; letter-spacing:0.02em; line-height:0.95; margin-bottom:24px; }
 
-    .section-tag {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--amber); margin-bottom: 16px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .section-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--amber); }
+    /* MILESTONE BANNER */
+    .milestone-banner { position:relative; z-index:2; margin:0 5vw; }
+    .milestone-inner { background:linear-gradient(135deg,rgba(232,160,32,0.08),rgba(232,160,32,0.03)); border:1px solid rgba(232,160,32,0.25); border-radius:12px; padding:16px 24px; display:flex; align-items:center; gap:16px; }
+    .milestone-inner .emoji { font-size:28px; shrink:0; }
+    .milestone-inner .text { flex:1; min-width:0; }
+    .milestone-inner .label { font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--amber); margin-bottom:2px; }
+    .milestone-inner .title { font-family:var(--font-d); font-size:18px; font-weight:700; color:var(--text); }
+    .milestone-inner .meta { font-size:12px; color:var(--muted); margin-top:2px; }
+    .milestone-banner.hidden { display:none; }
 
-    h2 {
-      font-family: var(--font-display);
-      font-size: clamp(36px, 5vw, 58px);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      line-height: 0.95;
-      margin-bottom: 24px;
-    }
+    /* LIVE ACTIVITY */
+    .activity-section { background:var(--bg2); }
+    .activity-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:1100px; }
+    .activity-card { background:var(--bg3); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    .activity-card-header { padding:16px 20px; border-bottom:1px solid var(--border2); display:flex; align-items:center; justify-content:space-between; }
+    .activity-card-title { font-family:var(--font-d); font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text); }
+    .live-dot { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--green); }
+    .live-dot::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 1.5s ease-in-out infinite; }
+
+    /* Feed */
+    .feed-list { padding:0; }
+    .feed-item { display:flex; align-items:flex-start; gap:12px; padding:12px 20px; border-bottom:1px solid var(--border2); }
+    .feed-item:last-child { border-bottom:none; }
+    .feed-avatar { width:32px; height:32px; border-radius:50%; background:var(--bg4); flex-shrink:0; object-fit:cover; }
+    .feed-body { flex:1; min-width:0; }
+    .feed-text { font-size:13px; color:var(--text); line-height:1.4; }
+    .feed-text strong { color:var(--text); font-weight:600; }
+    .feed-text .dim { color:var(--muted); }
+    .feed-sub { font-size:11px; color:var(--muted); margin-top:2px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .feed-meta { display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex-shrink:0; }
+    .game-pill { font-size:10px; font-family:monospace; padding:2px 6px; border-radius:4px; }
+    .game-pill.ats { background:rgba(232,160,32,0.1); color:var(--amber); }
+    .game-pill.ets { background:rgba(96,165,250,0.1); color:var(--blue); }
+    .time-ago { font-size:10px; color:var(--subtle); }
+    .feed-empty { padding:32px 20px; text-align:center; color:var(--muted); font-size:13px; }
+
+    /* Top drivers */
+    .drivers-list { padding:0; }
+    .driver-item { display:flex; align-items:center; gap:12px; padding:12px 20px; border-bottom:1px solid var(--border2); }
+    .driver-item:last-child { border-bottom:none; }
+    .driver-pos { font-family:var(--font-d); font-size:20px; width:28px; text-align:center; flex-shrink:0; }
+    .driver-avatar { width:36px; height:36px; border-radius:50%; background:var(--bg4); flex-shrink:0; object-fit:cover; }
+    .driver-info { flex:1; min-width:0; }
+    .driver-name { font-size:14px; font-weight:600; color:var(--text); }
+    .driver-rank { font-size:11px; margin-top:1px; }
+    .driver-xp { font-family:var(--font-d); font-size:18px; font-weight:700; color:var(--amber); flex-shrink:0; }
+    .driver-xp span { font-size:11px; color:var(--muted); }
+
+    /* EVENTS */
+    .events-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; max-width:900px; }
+    .event-card { background:var(--bg3); border:1px solid var(--border); border-radius:12px; padding:20px; display:flex; gap:16px; align-items:flex-start; transition:border-color 0.2s; }
+    .event-card:hover { border-color:rgba(232,160,32,0.25); }
+    .event-date-box { background:var(--bg4); border:1px solid var(--border); border-radius:8px; padding:8px 12px; text-align:center; flex-shrink:0; min-width:52px; }
+    .event-date-day { font-family:var(--font-d); font-size:26px; font-weight:800; color:var(--amber); line-height:1; }
+    .event-date-month { font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
+    .event-info { flex:1; min-width:0; }
+    .event-title { font-size:15px; font-weight:600; color:var(--text); margin-bottom:4px; }
+    .event-meta { font-size:12px; color:var(--muted); line-height:1.6; }
+    .event-route { font-size:12px; color:var(--amber); margin-top:4px; }
+    .events-empty { color:var(--muted); font-size:14px; padding:8px 0; }
 
     /* ABOUT */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      max-width: 1100px;
-    }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; max-width:1100px; }
+    .about-body { font-size:16px; font-weight:300; color:rgba(240,238,232,0.6); line-height:1.8; margin-bottom:20px; }
+    .pillars { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:32px; }
+    .pillar { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:20px; transition:border-color 0.2s; }
+    .pillar:hover { border-color:rgba(232,160,32,0.3); }
+    .pillar-icon { font-size:22px; margin-bottom:10px; display:block; }
+    .pillar-title { font-family:var(--font-d); font-size:14px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text); margin-bottom:4px; }
+    .pillar-body { font-size:13px; color:var(--muted); line-height:1.6; }
+    .games-strip { display:flex; gap:10px; margin-top:28px; flex-wrap:wrap; }
+    .game-badge { display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:6px; font-family:var(--font-d); font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; }
+    .game-badge.ats { background:rgba(232,160,32,0.1); color:var(--amber); border:1px solid rgba(232,160,32,0.22); }
+    .game-badge.ets { background:rgba(96,165,250,0.08); color:var(--blue); border:1px solid rgba(96,165,250,0.18); }
 
-    .about-body {
-      font-size: 16px; font-weight: 300;
-      color: rgba(240,238,232,0.6);
-      line-height: 1.8; margin-bottom: 20px;
-    }
-
-    .about-pillars {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 40px;
-    }
-
-    .pillar {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-      transition: border-color 0.2s;
-    }
-    .pillar:hover { border-color: rgba(232,160,32,0.3); }
-    .pillar-icon { font-size: 22px; margin-bottom: 10px; display: block; }
-    .pillar-title {
-      font-family: var(--font-display);
-      font-size: 14px; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--text); margin-bottom: 4px;
-    }
-    .pillar-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
-
-    .games-strip { display: flex; gap: 10px; margin-top: 32px; flex-wrap: wrap; }
-    .game-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 14px; border-radius: 6px;
-      font-family: var(--font-display);
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-    }
-    .game-badge.ats { background: rgba(232,160,32,0.1); color: var(--amber); border: 1px solid rgba(232,160,32,0.22); }
-    .game-badge.ets { background: rgba(96,165,250,0.08); color: #60A5FA; border: 1px solid rgba(96,165,250,0.18); }
-
-    /* SCREENSHOTS */
-    .screenshots { background: var(--bg2); }
-
-    .screenshots-intro { max-width: 500px; margin-bottom: 52px; }
-    .screenshots-intro p {
-      font-size: 16px; font-weight: 300;
-      color: rgba(240,238,232,0.55); line-height: 1.75;
-    }
-
-    .screenshots-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 14px;
-      max-width: 1100px;
-    }
-
-    .screenshot-card {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: border-color 0.25s, transform 0.25s;
-    }
-    .screenshot-card:hover { border-color: rgba(232,160,32,0.22); transform: translateY(-2px); }
-    .screenshot-card.large { grid-row: span 2; }
-
-    .screenshot-mockup {
-      width: 100%; aspect-ratio: 16/10;
-      background: var(--bg);
-      display: flex; align-items: center; justify-content: center;
-      border-bottom: 1px solid var(--border);
-      padding: 12px;
-    }
-    .screenshot-card.large .screenshot-mockup { aspect-ratio: 4/5; }
-
-    .mock-ui { width: 100%; height: 100%; display: flex; flex-direction: column; gap: 6px; }
-
-    .mock-topbar {
-      height: 24px;
-      background: rgba(255,255,255,0.035);
-      border-radius: 4px;
-      display: flex; align-items: center; gap: 5px; padding: 0 8px;
-      flex-shrink: 0;
-    }
-    .mock-dot { width: 6px; height: 6px; border-radius: 50%; }
-    .mock-dot.r { background: #F87171; } .mock-dot.y { background: var(--amber); } .mock-dot.g { background: #34D399; }
-
-    .mock-body { flex: 1; display: flex; gap: 6px; min-height: 0; }
-
-    .mock-sidebar {
-      width: 26%; background: rgba(255,255,255,0.025);
-      border-radius: 4px; padding: 8px 6px;
-      display: flex; flex-direction: column; gap: 4px; flex-shrink: 0;
-    }
-    .mock-nav-item { height: 16px; border-radius: 3px; background: rgba(255,255,255,0.04); }
-    .mock-nav-item.active { background: rgba(232,160,32,0.14); }
-
-    .mock-main { flex: 1; display: flex; flex-direction: column; gap: 6px; min-height: 0; }
-
-    .mock-stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 5px; height: 38px; flex-shrink: 0; }
-    .mock-stat {
-      background: rgba(255,255,255,0.035);
-      border-radius: 4px; border: 1px solid rgba(255,255,255,0.04);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .mock-stat-val { width: 42%; height: 7px; background: var(--amber); border-radius: 2px; opacity: 0.55; }
-
-    .mock-card { background: rgba(255,255,255,0.025); border-radius: 4px; flex: 1; min-height: 0; overflow: hidden; }
-    .mock-table-row { height: 12px; background: rgba(255,255,255,0.025); border-radius: 2px; margin: 5px 8px; }
-    .mock-table-row:nth-child(2n) { opacity: 0.55; }
-
-    .mock-lb-row {
-      display: flex; align-items: center; gap: 6px;
-      padding: 5px 8px;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-    }
-    .mock-rank { width: 14px; height: 7px; background: rgba(232,160,32,0.35); border-radius: 2px; flex-shrink: 0; }
-    .mock-avatar { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.08); flex-shrink: 0; }
-    .mock-name { flex:1; height: 6px; background: rgba(255,255,255,0.07); border-radius: 2px; }
-    .mock-xp { width: 26px; height: 6px; background: rgba(232,160,32,0.22); border-radius: 2px; flex-shrink: 0; }
-
-    .screenshot-label { padding: 16px 20px; }
-    .screenshot-title {
-      font-family: var(--font-display);
-      font-size: 13px; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--text); margin-bottom: 3px;
-    }
-    .screenshot-desc { font-size: 12px; color: var(--muted); }
+    /* FEATURES GRID */
+    .features-section { background:var(--bg2); }
+    .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; max-width:900px; }
+    .feature-cell { background:var(--bg3); padding:28px; }
+    .feature-icon { font-size:28px; margin-bottom:12px; }
+    .feature-title { font-family:var(--font-d); font-size:16px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--text); margin-bottom:6px; }
+    .feature-body { font-size:13px; color:var(--muted); line-height:1.6; }
 
     /* JOIN */
-    .join-section {
-      background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%);
-      border-top: 1px solid var(--border);
-    }
-    .join-inner { max-width: 680px; margin: 0 auto; text-align: center; }
-    .join-inner h2 { margin-bottom: 20px; }
-    .join-inner > p {
-      font-size: 16px; font-weight: 300;
-      color: rgba(240,238,232,0.55); line-height: 1.75;
-      margin-bottom: 48px;
-    }
-
-    .join-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 48px; text-align: left; }
-
-    .join-step {
-      padding: 24px;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-    }
-    .step-num {
-      font-family: var(--font-display);
-      font-size: 38px; font-weight: 800;
-      color: rgba(232,160,32,0.14);
-      line-height: 1; margin-bottom: 12px;
-    }
-    .step-title {
-      font-family: var(--font-display);
-      font-size: 14px; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--text); margin-bottom: 6px;
-    }
-    .step-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .join-section { background:linear-gradient(135deg,var(--bg2) 0%,var(--bg) 100%); border-top:1px solid var(--border); }
+    .join-inner { max-width:680px; margin:0 auto; text-align:center; }
+    .join-inner h2 { margin-bottom:20px; }
+    .join-inner > p { font-size:16px; font-weight:300; color:rgba(240,238,232,0.55); line-height:1.75; margin-bottom:48px; }
+    .join-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:48px; text-align:left; }
+    .join-step { padding:24px; background:var(--bg3); border:1px solid var(--border); border-radius:10px; }
+    .step-num { font-family:var(--font-d); font-size:38px; font-weight:800; color:rgba(232,160,32,0.14); line-height:1; margin-bottom:12px; }
+    .step-title { font-family:var(--font-d); font-size:14px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text); margin-bottom:6px; }
+    .step-body { font-size:13px; color:var(--muted); line-height:1.6; }
 
     /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 5vw;
-      display: flex; align-items: center; justify-content: space-between;
-      position: relative; z-index: 2;
-    }
-    .footer-left {
-      font-family: var(--font-display);
-      font-size: 12px; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--muted);
-    }
-    .footer-right { display: flex; align-items: center; gap: 20px; }
-    .footer-right a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .footer-right a:hover { color: var(--text); }
+    footer { border-top:1px solid var(--border); padding:28px 5vw; display:flex; align-items:center; justify-content:space-between; position:relative; z-index:2; }
+    .footer-left { font-family:var(--font-d); font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
+    .footer-right { display:flex; align-items:center; gap:20px; }
+    .footer-right a { font-size:13px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+    .footer-right a:hover { color:var(--text); }
 
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .fade-up { opacity: 0; animation: fadeUp 0.65s ease forwards; }
-    .fade-up:nth-child(1) { animation-delay: 0.1s; }
-    .fade-up:nth-child(2) { animation-delay: 0.22s; }
-    .fade-up:nth-child(3) { animation-delay: 0.36s; }
-    .fade-up:nth-child(4) { animation-delay: 0.5s; }
+    /* Animations */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { opacity:0; animation:fadeUp 0.65s ease forwards; }
+    .fade-up:nth-child(1){animation-delay:0.1s} .fade-up:nth-child(2){animation-delay:0.22s} .fade-up:nth-child(3){animation-delay:0.36s} .fade-up:nth-child(4){animation-delay:0.5s}
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .screenshots-grid { grid-template-columns: 1fr; }
-      .screenshot-card.large { grid-row: span 1; }
-      .screenshot-card.large .screenshot-mockup { aspect-ratio: 16/10; }
-      .join-steps { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 14px; text-align: center; }
-      .mock-sidebar { display: none; }
-      .stats-grid { grid-template-columns: 1fr; }
+    /* Responsive */
+    @media(max-width:900px) {
+      .nav-links { display:none; }
+      .about-grid,.activity-grid { grid-template-columns:1fr; gap:24px; }
+      .features-grid { grid-template-columns:1fr 1fr; }
+      .join-steps { grid-template-columns:1fr; }
+      footer { flex-direction:column; gap:14px; text-align:center; }
+      .stats-grid { grid-template-columns:1fr; }
+      .milestone-inner { flex-direction:column; text-align:center; }
+    }
+    @media(max-width:600px) {
+      .features-grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -491,8 +207,8 @@
     <div class="nav-wordmark">Hyperion<span>Logistics VTC</span></div>
   </a>
   <ul class="nav-links">
+    <li><a href="#activity">Activity</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#hub">The Hub</a></li>
     <li><a href="#join">Join</a></li>
     <li><a href="https://drivers.hyperionvtc.com" target="_blank">Drivers Hub</a></li>
     <li><a href="https://drivers.hyperionvtc.com/apply" class="nav-cta">Apply Now</a></li>
@@ -512,7 +228,7 @@
         Apply to Join
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="#about" class="btn-secondary">Learn more <span>→</span></a>
+      <a href="#activity" class="btn-secondary">See live activity <span>→</span></a>
     </div>
   </div>
 </section>
@@ -535,6 +251,59 @@
   </div>
 </div>
 
+<!-- LATEST MILESTONE -->
+<div class="milestone-banner hidden" id="milestone-banner" style="padding-top:28px; padding-bottom:0;">
+  <div class="milestone-inner">
+    <div class="emoji" id="milestone-emoji">🏆</div>
+    <div class="text">
+      <div class="label">Latest Milestone</div>
+      <div class="title" id="milestone-title"></div>
+      <div class="meta" id="milestone-meta"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE ACTIVITY -->
+<section id="activity" class="activity-section">
+  <div class="section-tag">Live Activity</div>
+  <h2>What's happening<br>right now</h2>
+  <div class="activity-grid">
+    <!-- Recent jobs feed -->
+    <div class="activity-card">
+      <div class="activity-card-header">
+        <span class="activity-card-title">Recent Deliveries</span>
+        <span class="live-dot">Live</span>
+      </div>
+      <div class="feed-list" id="feed-list">
+        <div class="feed-empty">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Right column: top drivers + upcoming events -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <!-- Top drivers -->
+      <div class="activity-card">
+        <div class="activity-card-header">
+          <span class="activity-card-title">🏆 Top Drivers</span>
+        </div>
+        <div class="drivers-list" id="drivers-list">
+          <div class="feed-empty">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Upcoming events -->
+      <div class="activity-card" id="events-card">
+        <div class="activity-card-header">
+          <span class="activity-card-title">📅 Upcoming Events</span>
+        </div>
+        <div id="events-list" style="padding:16px 20px;">
+          <div class="feed-empty">Loading...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section id="about">
   <div class="about-grid">
@@ -548,143 +317,26 @@
         <span class="game-badge ets">🇪🇺 Euro Truck Simulator 2</span>
       </div>
     </div>
-    <div class="about-pillars">
-      <div class="pillar">
-        <span class="pillar-icon">🚛</span>
-        <div class="pillar-title">Job Tracking</div>
-        <div class="pillar-body">Every delivery logged automatically via Trucky integration.</div>
-      </div>
-      <div class="pillar">
-        <span class="pillar-icon">⚡</span>
-        <div class="pillar-title">XP &amp; Ranks</div>
-        <div class="pillar-body">Earn points, unlock achievements, and climb from Rookie to Legend.</div>
-      </div>
-      <div class="pillar">
-        <span class="pillar-icon">🎯</span>
-        <div class="pillar-title">Challenges</div>
-        <div class="pillar-body">Monthly challenges with bonus XP rewards for top performers.</div>
-      </div>
-      <div class="pillar">
-        <span class="pillar-icon">📅</span>
-        <div class="pillar-title">Convoys</div>
-        <div class="pillar-body">Regular organized events across both simulators.</div>
-      </div>
+    <div class="pillars">
+      <div class="pillar"><span class="pillar-icon">🚛</span><div class="pillar-title">Job Tracking</div><div class="pillar-body">Every delivery logged automatically via Trucky integration.</div></div>
+      <div class="pillar"><span class="pillar-icon">⚡</span><div class="pillar-title">XP &amp; Ranks</div><div class="pillar-body">Earn points, unlock achievements, and climb from Rookie to Legend.</div></div>
+      <div class="pillar"><span class="pillar-icon">🏗️</span><div class="pillar-title">Divisions</div><div class="pillar-body">Join a specialised division — Hazmat, Flatbed, Tanker and more.</div></div>
+      <div class="pillar"><span class="pillar-icon">🎯</span><div class="pillar-title">Challenges</div><div class="pillar-body">Monthly challenges with bonus XP rewards for top performers.</div></div>
     </div>
   </div>
 </section>
 
-<!-- SCREENSHOTS -->
-<section id="hub" class="screenshots">
-  <div class="screenshots-intro">
-    <div class="section-tag">The Drivers Hub</div>
-    <h2>Your career,<br>in one place.</h2>
-    <p>A custom-built portal where you track jobs, climb the leaderboard, manage your profile, and watch your rank progress — all in real time.</p>
-  </div>
-  <div class="screenshots-grid">
-
-    <!-- Dashboard (large) -->
-    <div class="screenshot-card large">
-      <div class="screenshot-mockup">
-        <div class="mock-ui">
-          <div class="mock-topbar"><div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div></div>
-          <div class="mock-body">
-            <div class="mock-sidebar">
-              <div class="mock-nav-item active"></div>
-              <div class="mock-nav-item"></div><div class="mock-nav-item"></div>
-              <div class="mock-nav-item"></div><div class="mock-nav-item"></div>
-              <div class="mock-nav-item"></div>
-            </div>
-            <div class="mock-main">
-              <div style="height:36px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.12);border-radius:4px;flex-shrink:0;display:flex;align-items:center;gap:16px;padding:0 10px;">
-                <div style="width:14%;height:7px;background:rgba(232,160,32,0.3);border-radius:2px;"></div>
-                <div style="width:14%;height:7px;background:rgba(255,255,255,0.08);border-radius:2px;"></div>
-                <div style="width:14%;height:7px;background:rgba(255,255,255,0.08);border-radius:2px;"></div>
-                <div style="width:14%;height:7px;background:rgba(255,255,255,0.08);border-radius:2px;"></div>
-              </div>
-              <div class="mock-stats-row">
-                <div class="mock-stat"><div class="mock-stat-val"></div></div>
-                <div class="mock-stat"><div class="mock-stat-val" style="background:#60A5FA"></div></div>
-                <div class="mock-stat"><div class="mock-stat-val" style="background:#34D399"></div></div>
-              </div>
-              <div class="mock-card" style="flex:2">
-                <div class="mock-table-row" style="width:88%"></div>
-                <div class="mock-table-row" style="width:72%"></div>
-                <div class="mock-table-row" style="width:91%"></div>
-                <div class="mock-table-row" style="width:64%"></div>
-                <div class="mock-table-row" style="width:82%"></div>
-                <div class="mock-table-row" style="width:76%"></div>
-              </div>
-              <div class="mock-card"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="screenshot-label">
-        <div class="screenshot-title">Dashboard</div>
-        <div class="screenshot-desc">VTC-wide stats, recent jobs, upcoming events and onboarding progress at a glance</div>
-      </div>
-    </div>
-
-    <!-- Leaderboard -->
-    <div class="screenshot-card">
-      <div class="screenshot-mockup">
-        <div class="mock-ui">
-          <div class="mock-topbar"><div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div></div>
-          <div class="mock-body" style="flex-direction:column;padding:6px 0;">
-            <div class="mock-lb-row"><div class="mock-rank" style="background:rgba(255,215,0,0.55)"></div><div class="mock-avatar"></div><div class="mock-name"></div><div class="mock-xp"></div></div>
-            <div class="mock-lb-row"><div class="mock-rank" style="background:rgba(192,192,192,0.4)"></div><div class="mock-avatar"></div><div class="mock-name" style="width:55%"></div><div class="mock-xp"></div></div>
-            <div class="mock-lb-row"><div class="mock-rank" style="background:rgba(205,127,50,0.4)"></div><div class="mock-avatar"></div><div class="mock-name" style="width:70%"></div><div class="mock-xp"></div></div>
-            <div class="mock-lb-row"><div class="mock-rank"></div><div class="mock-avatar"></div><div class="mock-name" style="width:48%"></div><div class="mock-xp"></div></div>
-            <div class="mock-lb-row"><div class="mock-rank"></div><div class="mock-avatar"></div><div class="mock-name" style="width:65%"></div><div class="mock-xp"></div></div>
-          </div>
-        </div>
-      </div>
-      <div class="screenshot-label">
-        <div class="screenshot-title">Leaderboard</div>
-        <div class="screenshot-desc">Compete on XP, distance, and jobs — all time or this month</div>
-      </div>
-    </div>
-
-    <!-- Achievements -->
-    <div class="screenshot-card">
-      <div class="screenshot-mockup">
-        <div class="mock-ui">
-          <div class="mock-topbar"><div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div></div>
-          <div class="mock-body" style="flex-direction:column;gap:7px;padding:4px 0;">
-            <div style="background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.14);border-radius:5px;padding:9px;display:flex;align-items:center;gap:9px;flex-shrink:0;">
-              <div style="width:26px;height:26px;border-radius:6px;background:rgba(232,160,32,0.14);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">⭐</div>
-              <div style="flex:1;">
-                <div style="height:5px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:4px;"><div style="width:65%;height:100%;background:var(--amber);border-radius:3px;"></div></div>
-                <div style="height:4px;width:55%;background:rgba(255,255,255,0.05);border-radius:2px;"></div>
-              </div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;flex:1;">
-              <div style="background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.14);border-radius:5px;padding:7px;display:flex;gap:5px;align-items:center;">
-                <span style="font-size:14px;">🚛</span>
-                <div style="flex:1;"><div style="height:5px;background:rgba(255,255,255,0.1);border-radius:2px;width:75%;margin-bottom:3px;"></div><div style="height:3px;background:rgba(232,160,32,0.28);border-radius:2px;width:45%;"></div></div>
-              </div>
-              <div style="background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.14);border-radius:5px;padding:7px;display:flex;gap:5px;align-items:center;">
-                <span style="font-size:14px;">🗺️</span>
-                <div style="flex:1;"><div style="height:5px;background:rgba(255,255,255,0.1);border-radius:2px;width:60%;margin-bottom:3px;"></div><div style="height:3px;background:rgba(232,160,32,0.28);border-radius:2px;width:38%;"></div></div>
-              </div>
-              <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:5px;padding:7px;opacity:0.38;display:flex;gap:5px;align-items:center;">
-                <span style="font-size:14px;filter:grayscale(1)">💎</span>
-                <div style="flex:1;"><div style="height:5px;background:rgba(255,255,255,0.07);border-radius:2px;width:68%;margin-bottom:3px;"></div><div style="height:3px;background:rgba(255,255,255,0.05);border-radius:2px;width:50%;"></div></div>
-              </div>
-              <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:5px;padding:7px;opacity:0.38;display:flex;gap:5px;align-items:center;">
-                <span style="font-size:14px;filter:grayscale(1)">👑</span>
-                <div style="flex:1;"><div style="height:5px;background:rgba(255,255,255,0.07);border-radius:2px;width:50%;margin-bottom:3px;"></div><div style="height:3px;background:rgba(255,255,255,0.05);border-radius:2px;width:42%;"></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="screenshot-label">
-        <div class="screenshot-title">Achievements &amp; XP</div>
-        <div class="screenshot-desc">Track rank progression and unlock badges as you hit milestones</div>
-      </div>
-    </div>
-
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="section-tag">The Drivers Hub</div>
+  <h2 style="margin-bottom:32px;">Everything in<br>one place.</h2>
+  <div class="features-grid">
+    <div class="feature-cell"><div class="feature-icon">📊</div><div class="feature-title">Stats Deep Dive</div><div class="feature-body">Weekly charts, top cargo, favourite routes, personal bests — your full career in numbers.</div></div>
+    <div class="feature-cell"><div class="feature-icon">🔥</div><div class="feature-title">Streak Tracking</div><div class="feature-body">Build a weekly driving streak and earn milestone XP rewards for consistency.</div></div>
+    <div class="feature-cell"><div class="feature-icon">🏆</div><div class="feature-title">Achievements</div><div class="feature-body">10+ auto-unlocking achievements from First Delivery to Year Round Driver.</div></div>
+    <div class="feature-cell"><div class="feature-icon">✍️</div><div class="feature-title">Trip Reports</div><div class="feature-body">Write a report on any haul — attach a screenshot and share the highlights.</div></div>
+    <div class="feature-cell"><div class="feature-icon">📅</div><div class="feature-title">Convoy Events</div><div class="feature-body">RSVP to convoy events with full route info, server, DLC requirements and voice channel links.</div></div>
+    <div class="feature-cell"><div class="feature-icon">🗺️</div><div class="feature-title">Milestones Wall</div><div class="feature-body">A permanent record of every VTC achievement, with the driver who pushed it over the line.</div></div>
   </div>
 </section>
 
@@ -695,21 +347,9 @@
     <h2>Ready to haul<br>with Hyperion?</h2>
     <p>Applying takes less than 5 minutes. Fill out a short form, get reviewed by our team, and you'll be on the road with us in no time.</p>
     <div class="join-steps">
-      <div class="join-step">
-        <div class="step-num">01</div>
-        <div class="step-title">Apply</div>
-        <div class="step-body">Fill out our short application form. Tell us a bit about yourself and your trucking experience.</div>
-      </div>
-      <div class="join-step">
-        <div class="step-num">02</div>
-        <div class="step-title">Get Reviewed</div>
-        <div class="step-body">Our staff reviews your application and reaches out via Discord DM.</div>
-      </div>
-      <div class="join-step">
-        <div class="step-num">03</div>
-        <div class="step-title">Start Hauling</div>
-        <div class="step-body">Sign into the Drivers Hub, install Trucky, and your career begins.</div>
-      </div>
+      <div class="join-step"><div class="step-num">01</div><div class="step-title">Apply</div><div class="step-body">Fill out our short application form. Tell us a bit about yourself and your trucking experience.</div></div>
+      <div class="join-step"><div class="step-num">02</div><div class="step-title">Get Reviewed</div><div class="step-body">Our staff reviews your application and reaches out via Discord DM.</div></div>
+      <div class="join-step"><div class="step-num">03</div><div class="step-title">Start Hauling</div><div class="step-body">Sign into the Drivers Hub, install Trucky, and your career begins.</div></div>
     </div>
     <a href="https://drivers.hyperionvtc.com/apply" class="btn-primary" style="font-size:16px;padding:16px 44px;">
       Apply Now
@@ -728,46 +368,159 @@
 </footer>
 
 <script>
-  // Live stats from hub API
-  async function loadStats() {
-    try {
-      const res = await fetch('https://drivers.hyperionvtc.com/api/public/stats');
-      const data = await res.json();
-      const fmt = (n) => n >= 1000 ? (n/1000).toFixed(1)+'K' : String(n);
-      const set = (id, val) => {
-        const el = document.getElementById(id);
-        el.textContent = val;
-        el.classList.remove('loading');
-      };
-      set('stat-members', data.members);
-      set('stat-jobs', fmt(data.jobs));
-      set('stat-distance', fmt(data.distanceKm));
-    } catch(e) {
-      ['stat-members','stat-jobs','stat-distance'].forEach(id => {
-        const el = document.getElementById(id);
-        el.textContent = '—';
-        el.classList.remove('loading');
-      });
-    }
+const API = 'https://drivers.hyperionvtc.com/api/public/stats';
+const medals = ['🥇','🥈','🥉'];
+
+function timeAgo(iso) {
+  if (!iso) return '';
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff / 60000);
+  const h = Math.floor(diff / 3600000);
+  const d = Math.floor(diff / 86400000);
+  if (m < 1) return 'just now';
+  if (m < 60) return m + 'm ago';
+  if (h < 24) return h + 'h ago';
+  return d + 'd ago';
+}
+
+function fmt(n) {
+  if (n >= 1000000) return (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000) return (n/1000).toFixed(1) + 'K';
+  return String(n);
+}
+
+function setLoad(id, val) {
+  const el = document.getElementById(id);
+  el.textContent = val;
+  el.classList.remove('loading');
+}
+
+function renderFeed(feed) {
+  const el = document.getElementById('feed-list');
+  if (!feed || feed.length === 0) {
+    el.innerHTML = '<div class="feed-empty">No jobs logged yet — check back soon!</div>';
+    return;
   }
-  loadStats();
+  el.innerHTML = feed.map(j => `
+    <div class="feed-item">
+      <img class="feed-avatar" src="${j.avatarUrl || ''}" onerror="this.style.background='#1C1F27';this.style.visibility='hidden'" />
+      <div class="feed-body">
+        <div class="feed-text"><strong>${j.username}</strong> <span class="dim">hauled</span> ${j.cargo || 'cargo'}</div>
+        <div class="feed-sub">
+          <span>${j.originCity} → ${j.destinationCity}</span>
+          ${j.distanceKm ? `<span>${j.distanceKm.toLocaleString()} km</span>` : ''}
+        </div>
+      </div>
+      <div class="feed-meta">
+        <span class="game-pill ${j.game === 'ATS' ? 'ats' : 'ets'}">${j.game}</span>
+        <span class="time-ago">${timeAgo(j.finishedAt)}</span>
+      </div>
+    </div>
+  `).join('');
+}
 
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
+function renderDrivers(drivers) {
+  const el = document.getElementById('drivers-list');
+  if (!drivers || drivers.length === 0) {
+    el.innerHTML = '<div class="feed-empty">No drivers yet</div>';
+    return;
+  }
+  el.innerHTML = drivers.map((d, i) => `
+    <div class="driver-item">
+      <div class="driver-pos">${medals[i]}</div>
+      <img class="driver-avatar" src="${d.avatarUrl || ''}" onerror="this.style.background='#1C1F27';this.style.visibility='hidden'" />
+      <div class="driver-info">
+        <div class="driver-name">${d.username}</div>
+        <div class="driver-rank" style="color:${d.rank.color}">${d.rank.icon} ${d.rank.name}</div>
+      </div>
+      <div class="driver-xp">${fmt(d.totalXp)} <span>XP</span></div>
+    </div>
+  `).join('');
+}
+
+function renderEvents(events) {
+  const el = document.getElementById('events-list');
+  const card = document.getElementById('events-card');
+  if (!events || events.length === 0) {
+    card.style.display = 'none';
+    return;
+  }
+  el.innerHTML = events.map(e => {
+    const d = new Date(e.eventDate);
+    const day = d.getDate();
+    const month = d.toLocaleDateString('en-CA', { month: 'short' });
+    const time = d.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' });
+    return `
+      <div class="event-card" style="padding:14px;margin-bottom:10px;background:var(--bg4)">
+        <div class="event-date-box">
+          <div class="event-date-day">${day}</div>
+          <div class="event-date-month">${month}</div>
+        </div>
+        <div class="event-info">
+          <div class="event-title">${e.title}</div>
+          <div class="event-meta">${time}${e.game ? ' · ' + e.game : ''}${e.server ? ' · ' + e.server : ''}</div>
+          ${e.startCity && e.endCity ? `<div class="event-route">🚛 ${e.startCity} → ${e.endCity}</div>` : ''}
+          <div class="event-meta" style="margin-top:4px;">${e.attendeeCount} attending</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderMilestone(m) {
+  if (!m) return;
+  const banner = document.getElementById('milestone-banner');
+  document.getElementById('milestone-emoji').textContent = m.emoji;
+  document.getElementById('milestone-title').textContent = m.title;
+  const d = m.achievedAt ? new Date(m.achievedAt).toLocaleDateString('en-CA', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+  document.getElementById('milestone-meta').textContent =
+    `Achieved ${d}${m.triggeredBy ? ' · pushed over the line by ' + m.triggeredBy : ''}`;
+  banner.classList.remove('hidden');
+}
+
+async function loadData() {
+  try {
+    const res = await fetch(API);
+    const data = await res.json();
+
+    setLoad('stat-members', data.members);
+    setLoad('stat-jobs', fmt(data.jobs));
+    setLoad('stat-distance', fmt(data.distanceKm));
+
+    renderFeed(data.feed);
+    renderDrivers(data.topDrivers);
+    renderEvents(data.upcomingEvents);
+    renderMilestone(data.latestMilestone);
+  } catch(e) {
+    console.warn('Could not load stats:', e);
+    ['stat-members','stat-jobs','stat-distance'].forEach(id => {
+      const el = document.getElementById(id);
+      el.textContent = '—';
+      el.classList.remove('loading');
     });
-  }, { threshold: 0.08 });
+    document.getElementById('feed-list').innerHTML = '<div class="feed-empty">Unable to load live data</div>';
+    document.getElementById('drivers-list').innerHTML = '<div class="feed-empty">Unable to load</div>';
+  }
+}
 
-  document.querySelectorAll('.pillar, .screenshot-card, .join-step').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(18px)';
-    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
-    observer.observe(el);
+loadData();
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
   });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.pillar,.feature-cell,.join-step,.activity-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(18px)';
+  el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  observer.observe(el);
+});
 </script>
 </body>
 </html>
