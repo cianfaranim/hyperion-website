@@ -197,7 +197,6 @@
         <div class="np-status" id="np-status">Click play to tune in</div>
       </div>
 
-      <div id="np-debug" style="font-size:10px;color:#F87171;word-break:break-all;margin-bottom:12px;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);border-radius:6px;padding:8px"></div>
 
       <!-- Play button -->
       <div class="play-row">
@@ -219,8 +218,8 @@
       <!-- Info strip -->
       <div class="radio-info-strip">
         <div class="strip-cell">
-          <div class="strip-label">Listeners</div>
-          <div class="strip-val" id="strip-listeners">—</div>
+          <div class="strip-label">Station</div>
+          <div class="strip-val">Hyperion</div>
         </div>
         <div class="strip-cell">
           <div class="strip-label">Format</div>
@@ -258,9 +257,7 @@
   var npTitle        = document.getElementById('np-title');
   var npArtist       = document.getElementById('np-artist');
   var npArt          = document.getElementById('np-art');
-  var stripListeners = document.getElementById('strip-listeners');
   var volPct         = document.getElementById('vol-pct');
-  var debugEl        = document.getElementById('np-debug');
   var bars           = document.querySelectorAll('.bar');
   var playing        = false;
   var animFrame;
@@ -293,13 +290,9 @@
         return r.json();
       })
       .then(function(data) {
-        if (debugEl) debugEl.textContent = 'Raw: ' + JSON.stringify(data).slice(0, 300);
-
         var d = Array.isArray(data) ? data[0] : data;
         var np = d && d.now_playing;
         var song = np && np.song;
-        var listeners = d && d.listeners && d.listeners.current;
-
         if (song) {
           if (npTitle)  npTitle.textContent  = song.title  || 'Unknown Track';
           if (npArtist) npArtist.textContent = song.artist || 'Unknown Artist';
@@ -310,16 +303,11 @@
           if (npTrack) npTrack.style.display = 'flex';
         }
 
-        if (typeof listeners === 'number' && stripListeners) {
-          stripListeners.textContent = listeners + ' listener' + (listeners !== 1 ? 's' : '');
-        }
-
         if (playing && status) {
           status.innerHTML = '<span class="live-dot"></span>Live — Hyperion Radio';
         }
       })
       .catch(function(err) {
-        if (debugEl) debugEl.textContent = 'Fetch error: ' + err.message;
       });
   }
 
