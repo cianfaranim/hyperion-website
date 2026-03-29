@@ -280,6 +280,14 @@
     animFrame = setTimeout(animateBars, 120);
   }
 
+  // Poll immediately and every 15s
+  function startPolling() {
+    fetchNowPlaying();
+    setInterval(fetchNowPlaying, 15000);
+  }
+
+  startPolling();
+
   window.togglePlay = function() {
     if (playing) {
       clearTimeout(animFrame);
@@ -310,6 +318,7 @@
     btnPlay.style.display = 'none';
     btnPause.style.display = '';
     status.innerHTML = '<span class="live-dot"></span>Live \u2014 Hyperion Radio';
+    fetchNowPlaying();
     animateBars();
   });
 
