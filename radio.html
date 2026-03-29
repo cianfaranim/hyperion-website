@@ -250,18 +250,24 @@
 
 <script>
 (function() {
-  var audio   = document.getElementById('radio-audio');
-  var btnPlay = document.getElementById('icon-play');
-  var btnPause= document.getElementById('icon-pause');
-  var status  = document.getElementById('np-status');
-  var bars    = document.querySelectorAll('.bar');
-  var volSlider = document.getElementById('vol-slider');
-  var volPct  = document.getElementById('vol-pct');
-  var playing = false;
+  var audio          = document.getElementById('radio-audio');
+  var btnPlay        = document.getElementById('icon-play');
+  var btnPause       = document.getElementById('icon-pause');
+  var status         = document.getElementById('np-status');
+  var npTrack        = document.getElementById('np-track');
+  var npTitle        = document.getElementById('np-title');
+  var npArtist       = document.getElementById('np-artist');
+  var npArt          = document.getElementById('np-art');
+  var stripListeners = document.getElementById('strip-listeners');
+  var volPct         = document.getElementById('vol-pct');
+  var debugEl        = document.getElementById('np-debug');
+  var bars           = document.querySelectorAll('.bar');
+  var playing        = false;
   var animFrame;
 
   audio.volume = 0.8;
 
+  // ── Visualiser ──
   function setBarHeights(active) {
     bars.forEach(function(b) {
       if (active) {
@@ -273,51 +279,84 @@
       }
     });
   }
-
   function animateBars() {
     if (!playing) return;
     setBarHeights(true);
     animFrame = setTimeout(animateBars, 120);
   }
 
-  // Poll immediately and every 15s
-  function startPolling() {
-    fetchNowPlaying();
-    setInterval(fetchNowPlaying, 15000);
+  // ── Now Playing API ──
+  function fetchNowPlaying() {
+    fetch('https://radio.hyperionvtc.com/api/nowplaying/1', { cache: 'no-store' })
+      .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function(data) {
+        if (debugEl) debugEl.textContent = 'Raw: ' + JSON.stringify(data).slice(0, 300);
+
+        var d = Array.isArray(data) ? data[0] : data;
+        var np = d && d.now_playing;
+        var song = np && np.song;
+        var listeners = d && d.listeners && d.listeners.current;
+
+        if (song) {
+          if (npTitle)  npTitle.textContent  = song.title  || 'Unknown Track';
+          if (npArtist) npArtist.textContent = song.artist || 'Unknown Artist';
+          if (npArt) {
+            if (song.art) { npArt.src = song.art; npArt.style.display = 'block'; }
+            else            { npArt.style.display = 'none'; }
+          }
+          if (npTrack) npTrack.style.display = 'flex';
+        }
+
+        if (typeof listeners === 'number' && stripListeners) {
+          stripListeners.textContent = listeners + ' listener' + (listeners !== 1 ? 's' : '');
+        }
+
+        if (playing && status) {
+          status.innerHTML = '<span class="live-dot"></span>Live — Hyperion Radio';
+        }
+      })
+      .catch(function(err) {
+        if (debugEl) debugEl.textContent = 'Fetch error: ' + err.message;
+      });
   }
 
-  startPolling();
+  // Poll on load and every 15s
+  fetchNowPlaying();
+  setInterval(fetchNowPlaying, 15000);
 
+  // ── Controls ──
   window.togglePlay = function() {
     if (playing) {
       clearTimeout(animFrame);
       audio.pause();
       audio.src = '';
       playing = false;
-      btnPlay.style.display = '';
-      btnPause.style.display = 'none';
-      status.innerHTML = 'Click play to tune in';
+      if (btnPlay)  btnPlay.style.display  = '';
+      if (btnPause) btnPause.style.display = 'none';
+      if (status)   status.innerHTML = 'Click play to tune in';
       setBarHeights(false);
     } else {
-      status.innerHTML = 'Connecting\u2026';
+      if (status) status.innerHTML = 'Connecting…';
       audio.src = 'https://radio.hyperionvtc.com/listen/hyperion_radio/radio.mp3?t=' + Date.now();
       audio.load();
       audio.play().catch(function() {
-        status.innerHTML = 'Stream unavailable \u2014 try again later';
+        if (status) status.innerHTML = 'Stream unavailable — try again later';
       });
     }
   };
 
   window.setVol = function(v) {
     audio.volume = parseFloat(v);
-    volPct.textContent = Math.round(v * 100) + '%';
+    if (volPct) volPct.textContent = Math.round(v * 100) + '%';
   };
 
   audio.addEventListener('playing', function() {
     playing = true;
-    btnPlay.style.display = 'none';
-    btnPause.style.display = '';
-    status.innerHTML = '<span class="live-dot"></span>Live \u2014 Hyperion Radio';
+    if (btnPlay)  btnPlay.style.display  = 'none';
+    if (btnPause) btnPause.style.display = '';
     fetchNowPlaying();
     animateBars();
   });
@@ -325,15 +364,16 @@
   audio.addEventListener('waiting', function() {
     clearTimeout(animFrame);
     setBarHeights(false);
-    if (playing) status.innerHTML = 'Buffering\u2026';
+    if (playing && status) status.innerHTML = 'Buffering…';
   });
 
   audio.addEventListener('error', function() {
     clearTimeout(animFrame);
     playing = false;
-    btnPlay.style.display = '';
-    btnPause.style.display = 'none';
-    status.innerHTML = 'Stream unavailable \u2014 try again later';
+    if (btnPlay)  btnPlay.style.display  = '';
+    if (btnPause) btnPause.style.display = 'none';
+    if (npTrack)  npTrack.style.display  = 'none';
+    if (status)   status.innerHTML = 'Stream unavailable — try again later';
     setBarHeights(false);
   });
 })();
