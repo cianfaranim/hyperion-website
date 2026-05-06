@@ -579,7 +579,7 @@ document.querySelectorAll('.pillar,.feature-cell,.join-step,.activity-card').for
 
 <div id="radio-player">
   <audio id="radio-audio" preload="none">
-    <source src="https://radio.hyperionvtc.com/listen/hyperion_radio/radio.mp3" type="audio/mpeg">
+    <source src="https://s5.radio.co/s2b6af2e87/listen" type="audio/mpeg">
   </audio>
 
   <!-- Logo -->
@@ -637,7 +637,7 @@ document.querySelectorAll('.pillar,.feature-cell,.join-step,.activity-card').for
       status.className = 'radio-status';
       status.innerHTML = 'Connecting…';
       // Re-assign src to bypass browser cache and force reconnect
-      audio.src = 'https://radio.hyperionvtc.com/listen/hyperion_radio/radio.mp3?t=' + Date.now();
+      audio.src = 'https://s5.radio.co/s2b6af2e87/listen?t=' + Date.now();
       audio.load();
       audio.play().then(function() {
         playing = true;
