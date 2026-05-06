@@ -637,7 +637,7 @@ document.querySelectorAll('.pillar,.feature-cell,.join-step,.activity-card').for
       status.className = 'radio-status';
       status.innerHTML = 'Connecting…';
       // Re-assign src to bypass browser cache and force reconnect
-      audio.src = 'https://s5.radio.co/s2b6af2e87/listen?t=' + Date.now();
+      audio.src = 'https://s5.radio.co/s2b6af2e87/listen';
       audio.load();
       audio.play().then(function() {
         playing = true;
