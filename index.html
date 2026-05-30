@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hyperion Logistics VTC — ATS & ETS2</title>
-  <meta name="description" content="A community-driven Virtual Trucking Company for ATS and ETS2. XP ranks, achievements, divisions, convoy events and more. Apply free today." />
+  <meta name="description" content="A community-driven Virtual Trucking Company for ATS and ETS2. Custom drivers hub, XP ranks, achievements, divisions, convoy events. Apply free today." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -20,224 +20,224 @@
       --font-b: 'Barlow', sans-serif;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font-b); font-weight: 400; line-height: 1.6; overflow-x: hidden; padding-bottom: 72px; }
-
-
-    /* ── RADIO PLAYER ── */
-    #radio-player {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
-      height: 64px;
-      background: rgba(8,10,14,0.97);
-      border-top: 1px solid rgba(232,160,32,0.18);
-      backdrop-filter: blur(16px);
-      display: flex; align-items: center;
-      padding: 0 5vw; gap: 20px;
-    }
-    .radio-logo { display:flex; align-items:center; gap:10px; flex-shrink:0; }
-    .radio-logo-mark { width:28px; height:28px; background:var(--amber); border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-    .radio-logo-mark svg { width:13px; height:13px; }
-    .radio-name { font-family:var(--font-d); font-weight:800; font-size:13px; letter-spacing:0.14em; color:var(--text); line-height:1; }
-    .radio-name span { display:block; font-size:9px; font-weight:600; letter-spacing:0.2em; color:var(--amber); margin-top:2px; }
-    .radio-divider { width:1px; height:28px; background:var(--border); flex-shrink:0; }
-    .radio-play { width:38px; height:38px; border-radius:50%; background:var(--amber); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s, transform 0.15s; flex-shrink:0; }
-    .radio-play:hover { background:var(--amber-dim); transform:scale(1.06); }
-    .radio-play svg { width:14px; height:14px; fill:#000; }
-    .radio-info { flex:1; min-width:0; }
-    .radio-status { font-size:12px; color:var(--muted); letter-spacing:0.04em; transition:color 0.3s; }
-    .radio-status.live { color:var(--text); }
-    .radio-live-dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#F87171; margin-right:6px; animation:pulse-dot 1.4s ease-in-out infinite; vertical-align:middle; }
-    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
-    .radio-vol { display:flex; align-items:center; gap:8px; flex-shrink:0; }
-    .radio-vol svg { width:14px; height:14px; fill:var(--muted); flex-shrink:0; }
-    .radio-vol input[type=range] {
-      -webkit-appearance:none; width:80px; height:3px;
-      background:var(--subtle); border-radius:2px; outline:none; cursor:pointer;
-    }
-    .radio-vol input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance:none; width:12px; height:12px; border-radius:50%;
-      background:var(--amber); cursor:pointer;
-    }
-    .radio-vol input[type=range]::-moz-range-thumb {
-      width:12px; height:12px; border-radius:50%; border:none;
-      background:var(--amber); cursor:pointer;
-    }
-    @media(max-width:600px) { .radio-vol { display:none; } .radio-divider { display:none; } }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); font-weight: 400; line-height: 1.6; overflow-x: hidden; padding-bottom: 64px; }
 
     /* Noise + grid */
     body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; opacity:0.35; }
     body::after { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px); background-size:60px 60px; pointer-events:none; z-index:0; }
 
-    /* NAV */
-    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 5vw; height:64px; background:rgba(8,10,14,0.9); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
+    /* ── NAV ── */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 5vw; height:60px; background:rgba(8,10,14,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
     .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
-    .nav-logo-mark { width:32px; height:32px; background:var(--amber); border-radius:8px; display:flex; align-items:center; justify-content:center; }
-    .nav-logo-mark svg { width:16px; height:16px; }
-    .nav-wordmark { font-family:var(--font-d); font-weight:800; font-size:17px; letter-spacing:0.12em; color:var(--text); line-height:1; }
+    .nav-logo-mark { width:30px; height:30px; background:var(--amber); border-radius:7px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .nav-logo-mark svg { width:15px; height:15px; }
+    .nav-wordmark { font-family:var(--font-d); font-weight:800; font-size:16px; letter-spacing:0.12em; color:var(--text); line-height:1; }
     .nav-wordmark span { display:block; font-size:9px; font-weight:600; letter-spacing:0.2em; color:var(--amber); margin-top:2px; }
-    .nav-links { display:flex; align-items:center; gap:24px; list-style:none; }
-    .nav-links a { font-size:13px; font-weight:500; color:var(--muted); text-decoration:none; letter-spacing:0.05em; text-transform:uppercase; transition:color 0.2s; }
+    .nav-links { display:flex; align-items:center; gap:20px; list-style:none; }
+    .nav-links a { font-size:12px; font-weight:500; color:var(--muted); text-decoration:none; letter-spacing:0.05em; text-transform:uppercase; transition:color 0.2s; }
     .nav-links a:hover { color:var(--text); }
-    .nav-cta { background:var(--amber)!important; color:#000!important; padding:8px 20px!important; border-radius:6px; font-weight:700!important; }
+    .nav-cta { background:var(--amber)!important; color:#000!important; padding:7px 18px!important; border-radius:6px; font-weight:700!important; }
     .nav-cta:hover { background:var(--amber-dim)!important; }
-    .nav-discord { background:rgba(88,101,242,0.15)!important; color:#7289DA!important; border:1px solid rgba(88,101,242,0.3)!important; padding:8px 16px!important; border-radius:6px; font-weight:600!important; transition:background 0.2s!important; }
+    .nav-discord { background:rgba(88,101,242,0.15)!important; color:#7289DA!important; border:1px solid rgba(88,101,242,0.3)!important; padding:7px 14px!important; border-radius:6px; font-weight:600!important; }
     .nav-discord:hover { background:rgba(88,101,242,0.25)!important; }
-    .btn-discord { display:inline-flex; align-items:center; gap:8px; background:rgba(88,101,242,0.12); color:#7289DA; border:1px solid rgba(88,101,242,0.3); font-family:var(--font-d); font-size:15px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; padding:14px 28px; border-radius:6px; transition:background 0.2s,transform 0.15s; }
-    .btn-discord:hover { background:rgba(88,101,242,0.22); transform:translateY(-1px); }
 
-    /* HERO */
-    .hero { position:relative; min-height:100vh; display:flex; align-items:center; padding:120px 5vw 80px; overflow:hidden; }
-    .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 65% 50%,rgba(232,160,32,0.07) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 15% 80%,rgba(232,160,32,0.04) 0%,transparent 60%); }
-    .hero-line { position:absolute; top:0; right:22vw; width:1px; height:100%; background:linear-gradient(to bottom,transparent,var(--amber) 30%,var(--amber) 70%,transparent); opacity:0.1; transform:skewX(-6deg); }
-    .hero-content { position:relative; z-index:2; max-width:680px; }
-    .hero-tag { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); margin-bottom:24px; }
-    .hero-tag::before { content:''; display:block; width:28px; height:1px; background:var(--amber); }
-    h1 { font-family:var(--font-d); font-size:clamp(58px,9vw,100px); font-weight:800; line-height:0.9; letter-spacing:-0.01em; text-transform:uppercase; margin-bottom:28px; }
+    /* Mobile hamburger */
+    .nav-hamburger { display:none; background:none; border:none; cursor:pointer; padding:4px; color:var(--muted); }
+    .nav-hamburger:hover { color:var(--text); }
+    .nav-mobile { display:none; position:fixed; top:60px; left:0; right:0; background:rgba(8,10,14,0.98); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:16px 5vw; flex-direction:column; gap:4px; z-index:99; }
+    .nav-mobile.open { display:flex; }
+    .nav-mobile a { font-size:14px; font-weight:500; color:var(--muted); text-decoration:none; letter-spacing:0.05em; text-transform:uppercase; padding:10px 0; border-bottom:1px solid var(--border2); transition:color 0.2s; }
+    .nav-mobile a:last-child { border-bottom:none; }
+    .nav-mobile a:hover { color:var(--text); }
+    .nav-mobile .m-cta { color:var(--amber)!important; font-weight:700!important; }
+    @media(max-width:860px) { .nav-links { display:none; } .nav-hamburger { display:block; } }
+
+    /* ── HERO ── */
+    .hero { position:relative; min-height:82vh; display:flex; align-items:center; padding:80px 5vw 60px; overflow:hidden; }
+    .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 70% 70% at 60% 50%,rgba(232,160,32,0.07) 0%,transparent 70%); }
+    .hero-line { position:absolute; top:0; right:24vw; width:1px; height:100%; background:linear-gradient(to bottom,transparent,var(--amber) 30%,var(--amber) 70%,transparent); opacity:0.08; }
+    .hero-content { position:relative; z-index:2; max-width:700px; }
+    .hero-tag { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--amber); margin-bottom:20px; }
+    .hero-tag::before { content:''; display:block; width:24px; height:1px; background:var(--amber); }
+    h1 { font-family:var(--font-d); font-size:clamp(52px,8.5vw,96px); font-weight:800; line-height:0.9; letter-spacing:-0.01em; text-transform:uppercase; margin-bottom:24px; }
     h1 em { font-style:normal; color:var(--amber); display:block; }
-    .hero-desc { font-size:17px; font-weight:300; color:rgba(240,238,232,0.6); max-width:460px; line-height:1.75; margin-bottom:40px; }
-    .hero-actions { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+    .hero-sub { font-size:16px; font-weight:400; color:rgba(240,238,232,0.55); max-width:480px; line-height:1.7; margin-bottom:16px; }
+    .hero-proof { display:flex; align-items:center; gap:16px; margin-bottom:36px; flex-wrap:wrap; }
+    .proof-badge { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); }
+    .proof-badge::before { content:'✓'; color:var(--green); font-weight:700; }
+    .hero-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
     .btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--amber); color:#000; font-family:var(--font-d); font-size:15px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; padding:14px 32px; border-radius:6px; transition:background 0.2s,transform 0.15s; }
     .btn-primary:hover { background:var(--amber-dim); transform:translateY(-1px); }
-    .btn-secondary { display:inline-flex; align-items:center; gap:6px; color:var(--muted); font-size:14px; font-weight:500; text-decoration:none; transition:color 0.2s; }
-    .btn-secondary:hover { color:var(--text); }
-    .btn-secondary span { transition:transform 0.2s; }
-    .btn-secondary:hover span { transform:translateX(4px); }
+    .btn-ghost { display:inline-flex; align-items:center; gap:8px; background:transparent; color:var(--text); font-family:var(--font-d); font-size:14px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; padding:13px 24px; border-radius:6px; border:1px solid var(--border); transition:border-color 0.2s,background 0.2s; }
+    .btn-ghost:hover { border-color:rgba(255,255,255,0.2); background:rgba(255,255,255,0.04); }
+    .btn-discord-sm { display:inline-flex; align-items:center; gap:6px; color:#7289DA; font-size:13px; font-weight:500; text-decoration:none; transition:color 0.2s; }
+    .btn-discord-sm:hover { color:#8fa4f0; }
 
-    /* STATS STRIP */
-    .stats-strip { position:relative; z-index:2; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:rgba(15,17,23,0.7); padding:36px 5vw; }
-    .stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:640px; margin:0 auto; }
-    .stat-cell { background:var(--bg2); padding:28px 32px; text-align:center; }
-    .stat-value { font-family:var(--font-d); font-size:44px; font-weight:800; color:var(--amber); line-height:1; letter-spacing:-0.02em; }
-    .stat-value.loading { color:var(--muted); font-size:22px; animation:pulse 1.4s ease-in-out infinite; }
+    /* ── STATS STRIP ── */
+    .stats-strip { position:relative; z-index:2; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:rgba(15,17,23,0.8); padding:28px 5vw; }
+    .stats-inner { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:580px; margin:0 auto; }
+    .stat-cell { background:var(--bg2); padding:22px 28px; text-align:center; }
+    .stat-value { font-family:var(--font-d); font-size:40px; font-weight:800; color:var(--amber); line-height:1; letter-spacing:-0.02em; }
+    .stat-value.loading { color:var(--subtle); font-size:20px; animation:pulse 1.4s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-    .stat-label { font-size:11px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:6px; }
+    .stat-label { font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:4px; }
 
-    /* SECTIONS */
-    section { padding:80px 5vw; position:relative; z-index:2; }
-    .section-tag { font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+    /* ── LIVE ACTIVITY ── */
+    section { padding:72px 5vw; position:relative; z-index:2; }
+    .section-tag { font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
     .section-tag::before { content:''; display:block; width:24px; height:1px; background:var(--amber); }
-    h2 { font-family:var(--font-d); font-size:clamp(32px,5vw,52px); font-weight:800; text-transform:uppercase; letter-spacing:0.02em; line-height:0.95; margin-bottom:24px; }
-
-    /* MILESTONE BANNER */
-    .milestone-banner { position:relative; z-index:2; margin:0 5vw; }
-    .milestone-inner { background:linear-gradient(135deg,rgba(232,160,32,0.08),rgba(232,160,32,0.03)); border:1px solid rgba(232,160,32,0.25); border-radius:12px; padding:16px 24px; display:flex; align-items:center; gap:16px; }
-    .milestone-inner .emoji { font-size:28px; shrink:0; }
-    .milestone-inner .text { flex:1; min-width:0; }
-    .milestone-inner .label { font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--amber); margin-bottom:2px; }
-    .milestone-inner .title { font-family:var(--font-d); font-size:18px; font-weight:700; color:var(--text); }
-    .milestone-inner .meta { font-size:12px; color:var(--muted); margin-top:2px; }
-    .milestone-banner.hidden { display:none; }
-
-    /* LIVE ACTIVITY */
+    h2 { font-family:var(--font-d); font-size:clamp(30px,4.5vw,48px); font-weight:800; text-transform:uppercase; letter-spacing:0.02em; line-height:0.95; margin-bottom:32px; }
     .activity-section { background:var(--bg2); }
-    .activity-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:1100px; }
+    .activity-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:1100px; }
     .activity-card { background:var(--bg3); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
-    .activity-card-header { padding:16px 20px; border-bottom:1px solid var(--border2); display:flex; align-items:center; justify-content:space-between; }
-    .activity-card-title { font-family:var(--font-d); font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text); }
-    .live-dot { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--green); }
+    .activity-card-header { padding:14px 18px; border-bottom:1px solid var(--border2); display:flex; align-items:center; justify-content:space-between; }
+    .activity-card-title { font-family:var(--font-d); font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text); }
+    .live-dot { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--green); }
     .live-dot::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 1.5s ease-in-out infinite; }
-
-    /* Feed */
     .feed-list { padding:0; }
-    .feed-item { display:flex; align-items:flex-start; gap:12px; padding:12px 20px; border-bottom:1px solid var(--border2); }
+    .feed-item { display:flex; align-items:flex-start; gap:10px; padding:11px 18px; border-bottom:1px solid var(--border2); }
     .feed-item:last-child { border-bottom:none; }
-    .feed-avatar { width:32px; height:32px; border-radius:50%; background:var(--bg4); flex-shrink:0; object-fit:cover; }
+    .feed-avatar { width:30px; height:30px; border-radius:50%; background:var(--bg4); flex-shrink:0; object-fit:cover; }
     .feed-body { flex:1; min-width:0; }
-    .feed-text { font-size:13px; color:var(--text); line-height:1.4; }
-    .feed-text strong { color:var(--text); font-weight:600; }
+    .feed-text { font-size:12px; color:var(--text); line-height:1.4; }
+    .feed-text strong { font-weight:600; }
     .feed-text .dim { color:var(--muted); }
-    .feed-sub { font-size:11px; color:var(--muted); margin-top:2px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-    .feed-meta { display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex-shrink:0; }
-    .game-pill { font-size:10px; font-family:monospace; padding:2px 6px; border-radius:4px; }
+    .feed-sub { font-size:11px; color:var(--muted); margin-top:2px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+    .feed-meta { display:flex; flex-direction:column; align-items:flex-end; gap:3px; flex-shrink:0; }
+    .game-pill { font-size:10px; font-family:monospace; padding:2px 5px; border-radius:3px; }
     .game-pill.ats { background:rgba(232,160,32,0.1); color:var(--amber); }
     .game-pill.ets { background:rgba(96,165,250,0.1); color:var(--blue); }
     .time-ago { font-size:10px; color:var(--subtle); }
-    .feed-empty { padding:32px 20px; text-align:center; color:var(--muted); font-size:13px; }
-
-    /* Top drivers */
+    .feed-empty { padding:28px 18px; text-align:center; color:var(--muted); font-size:13px; }
     .drivers-list { padding:0; }
-    .driver-item { display:flex; align-items:center; gap:12px; padding:12px 20px; border-bottom:1px solid var(--border2); }
+    .driver-item { display:flex; align-items:center; gap:10px; padding:11px 18px; border-bottom:1px solid var(--border2); }
     .driver-item:last-child { border-bottom:none; }
-    .driver-pos { font-family:var(--font-d); font-size:20px; width:28px; text-align:center; flex-shrink:0; }
-    .driver-avatar { width:36px; height:36px; border-radius:50%; background:var(--bg4); flex-shrink:0; object-fit:cover; }
+    .driver-pos { font-family:var(--font-d); font-size:18px; width:24px; text-align:center; flex-shrink:0; }
+    .driver-avatar { width:34px; height:34px; border-radius:50%; background:var(--bg4); flex-shrink:0; object-fit:cover; }
     .driver-info { flex:1; min-width:0; }
-    .driver-name { font-size:14px; font-weight:600; color:var(--text); }
+    .driver-name { font-size:13px; font-weight:600; color:var(--text); }
     .driver-rank { font-size:11px; margin-top:1px; }
-    .driver-xp { font-family:var(--font-d); font-size:18px; font-weight:700; color:var(--amber); flex-shrink:0; }
-    .driver-xp span { font-size:11px; color:var(--muted); }
+    .driver-xp { font-family:var(--font-d); font-size:16px; font-weight:700; color:var(--amber); flex-shrink:0; }
+    .driver-xp span { font-size:10px; color:var(--muted); }
 
-    /* EVENTS */
-    .events-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; max-width:900px; }
-    .event-card { background:var(--bg3); border:1px solid var(--border); border-radius:12px; padding:20px; display:flex; gap:16px; align-items:flex-start; transition:border-color 0.2s; }
-    .event-card:hover { border-color:rgba(232,160,32,0.25); }
-    .event-date-box { background:var(--bg4); border:1px solid var(--border); border-radius:8px; padding:8px 12px; text-align:center; flex-shrink:0; min-width:52px; }
-    .event-date-day { font-family:var(--font-d); font-size:26px; font-weight:800; color:var(--amber); line-height:1; }
-    .event-date-month { font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
-    .event-info { flex:1; min-width:0; }
-    .event-title { font-size:15px; font-weight:600; color:var(--text); margin-bottom:4px; }
-    .event-meta { font-size:12px; color:var(--muted); line-height:1.6; }
-    .event-route { font-size:12px; color:var(--amber); margin-top:4px; }
-    .events-empty { color:var(--muted); font-size:14px; padding:8px 0; }
+    /* ── HUB FEATURE HIGHLIGHT ── */
+    .hub-section { background:var(--bg); }
+    .hub-inner { max-width:1100px; }
+    .hub-intro { font-size:16px; font-weight:300; color:rgba(240,238,232,0.55); max-width:520px; line-height:1.75; margin-bottom:40px; }
+    .hub-custom-badge { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--amber); background:var(--amber-glow); border:1px solid rgba(232,160,32,0.25); border-radius:20px; padding:5px 12px; margin-bottom:20px; }
+    .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; max-width:900px; margin-bottom:32px; }
+    .feature-cell { background:var(--bg3); padding:24px; transition:background 0.2s; }
+    .feature-cell:hover { background:var(--bg4); }
+    .feature-icon { font-size:24px; margin-bottom:10px; }
+    .feature-title { font-family:var(--font-d); font-size:15px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--text); margin-bottom:5px; }
+    .feature-body { font-size:12px; color:var(--muted); line-height:1.6; }
+    .hub-cta { display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:13px; text-decoration:none; transition:color 0.2s; }
+    .hub-cta:hover { color:var(--text); }
 
-    /* ABOUT */
-    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; max-width:1100px; }
-    .about-body { font-size:16px; font-weight:300; color:rgba(240,238,232,0.6); line-height:1.8; margin-bottom:20px; }
-    .pillars { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:32px; }
-    .pillar { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:20px; transition:border-color 0.2s; }
-    .pillar:hover { border-color:rgba(232,160,32,0.3); }
-    .pillar-icon { font-size:22px; margin-bottom:10px; display:block; }
-    .pillar-title { font-family:var(--font-d); font-size:14px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text); margin-bottom:4px; }
-    .pillar-body { font-size:13px; color:var(--muted); line-height:1.6; }
-    .games-strip { display:flex; gap:10px; margin-top:28px; flex-wrap:wrap; }
-    .game-badge { display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:6px; font-family:var(--font-d); font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; }
+    /* ── JOIN ── */
+    .join-section { background:var(--bg2); border-top:1px solid var(--border); }
+    .join-inner { max-width:680px; margin:0 auto; text-align:center; }
+    .join-inner h2 { margin-bottom:16px; }
+    .join-inner > p { font-size:16px; font-weight:300; color:rgba(240,238,232,0.5); line-height:1.75; margin-bottom:40px; }
+    .join-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:40px; text-align:left; }
+    .join-step { padding:22px; background:var(--bg3); border:1px solid var(--border); border-radius:10px; transition:border-color 0.2s; }
+    .join-step:hover { border-color:rgba(232,160,32,0.2); }
+    .step-num { font-family:var(--font-d); font-size:36px; font-weight:800; color:rgba(232,160,32,0.12); line-height:1; margin-bottom:10px; }
+    .step-title { font-family:var(--font-d); font-size:14px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text); margin-bottom:5px; }
+    .step-body { font-size:12px; color:var(--muted); line-height:1.6; }
+    .join-actions { display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
+    .btn-discord-lg { display:inline-flex; align-items:center; gap:8px; background:rgba(88,101,242,0.12); color:#7289DA; border:1px solid rgba(88,101,242,0.3); font-family:var(--font-d); font-size:14px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; padding:13px 24px; border-radius:6px; transition:background 0.2s; }
+    .btn-discord-lg:hover { background:rgba(88,101,242,0.22); }
+
+    /* ── ABOUT ── */
+    .about-section { background:var(--bg); }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; max-width:1100px; }
+    .about-body { font-size:15px; font-weight:300; color:rgba(240,238,232,0.55); line-height:1.85; margin-bottom:18px; }
+    .pillars { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:28px; }
+    .pillar { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:18px; transition:border-color 0.2s; }
+    .pillar:hover { border-color:rgba(232,160,32,0.25); }
+    .pillar-icon { font-size:20px; margin-bottom:8px; display:block; }
+    .pillar-title { font-family:var(--font-d); font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text); margin-bottom:3px; }
+    .pillar-body { font-size:12px; color:var(--muted); line-height:1.6; }
+    .games-strip { display:flex; gap:8px; margin-top:24px; flex-wrap:wrap; }
+    .game-badge { display:inline-flex; align-items:center; gap:6px; padding:7px 12px; border-radius:6px; font-family:var(--font-d); font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; }
     .game-badge.ats { background:rgba(232,160,32,0.1); color:var(--amber); border:1px solid rgba(232,160,32,0.22); }
     .game-badge.ets { background:rgba(96,165,250,0.08); color:var(--blue); border:1px solid rgba(96,165,250,0.18); }
 
-    /* FEATURES GRID */
-    .features-section { background:var(--bg2); }
-    .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; max-width:900px; }
-    .feature-cell { background:var(--bg3); padding:28px; }
-    .feature-icon { font-size:28px; margin-bottom:12px; }
-    .feature-title { font-family:var(--font-d); font-size:16px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--text); margin-bottom:6px; }
-    .feature-body { font-size:13px; color:var(--muted); line-height:1.6; }
+    /* ── MILESTONE BANNER ── */
+    .milestone-banner { position:relative; z-index:2; margin:0 5vw; padding-top:24px; }
+    .milestone-inner { background:linear-gradient(135deg,rgba(232,160,32,0.08),rgba(232,160,32,0.03)); border:1px solid rgba(232,160,32,0.22); border-radius:12px; padding:14px 20px; display:flex; align-items:center; gap:14px; }
+    .milestone-inner .emoji { font-size:26px; flex-shrink:0; }
+    .milestone-inner .text { flex:1; min-width:0; }
+    .milestone-inner .label { font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--amber); margin-bottom:1px; }
+    .milestone-inner .title { font-family:var(--font-d); font-size:17px; font-weight:700; color:var(--text); }
+    .milestone-inner .meta { font-size:12px; color:var(--muted); margin-top:1px; }
+    .milestone-banner.hidden { display:none; }
 
-    /* JOIN */
-    .join-section { background:linear-gradient(135deg,var(--bg2) 0%,var(--bg) 100%); border-top:1px solid var(--border); }
-    .join-inner { max-width:680px; margin:0 auto; text-align:center; }
-    .join-inner h2 { margin-bottom:20px; }
-    .join-inner > p { font-size:16px; font-weight:300; color:rgba(240,238,232,0.55); line-height:1.75; margin-bottom:48px; }
-    .join-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:48px; text-align:left; }
-    .join-step { padding:24px; background:var(--bg3); border:1px solid var(--border); border-radius:10px; }
-    .step-num { font-family:var(--font-d); font-size:38px; font-weight:800; color:rgba(232,160,32,0.14); line-height:1; margin-bottom:12px; }
-    .step-title { font-family:var(--font-d); font-size:14px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text); margin-bottom:6px; }
-    .step-body { font-size:13px; color:var(--muted); line-height:1.6; }
+    /* ── EVENTS ── */
+    .events-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; max-width:900px; }
+    .event-card { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:18px; display:flex; gap:14px; align-items:flex-start; transition:border-color 0.2s; }
+    .event-card:hover { border-color:rgba(232,160,32,0.22); }
+    .event-date-box { background:var(--bg4); border:1px solid var(--border); border-radius:7px; padding:7px 10px; text-align:center; flex-shrink:0; min-width:48px; }
+    .event-date-day { font-family:var(--font-d); font-size:24px; font-weight:800; color:var(--amber); line-height:1; }
+    .event-date-month { font-size:9px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
+    .event-info { flex:1; min-width:0; }
+    .event-title { font-size:14px; font-weight:600; color:var(--text); margin-bottom:3px; }
+    .event-meta { font-size:12px; color:var(--muted); line-height:1.6; }
+    .event-route { font-size:12px; color:var(--amber); margin-top:3px; }
+    .events-empty { color:var(--muted); font-size:13px; padding:4px 0; }
 
-    /* FOOTER */
-    footer { border-top:1px solid var(--border); padding:28px 5vw; display:flex; align-items:center; justify-content:space-between; position:relative; z-index:2; }
-    .footer-left { font-family:var(--font-d); font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
-    .footer-parent { font-size:11px; color:var(--subtle); margin-top:4px; font-family:var(--font-b); font-weight:400; letter-spacing:0.04em; text-transform:none; }
+    /* ── FOOTER ── */
+    footer { border-top:1px solid var(--border); padding:24px 5vw; display:flex; align-items:center; justify-content:space-between; position:relative; z-index:2; }
+    .footer-left { font-family:var(--font-d); font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
+    .footer-parent { font-size:11px; color:var(--subtle); margin-top:3px; font-family:var(--font-b); font-weight:400; letter-spacing:0.04em; text-transform:none; }
     .footer-parent a { color:var(--subtle); text-decoration:none; transition:color 0.2s; }
     .footer-parent a:hover { color:var(--muted); }
-    .footer-right { display:flex; align-items:center; gap:20px; }
-    .footer-right a { font-size:13px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+    .footer-right { display:flex; align-items:center; gap:18px; }
+    .footer-right a { font-size:12px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
     .footer-right a:hover { color:var(--text); }
 
-    /* Animations */
-    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
-    .fade-up { opacity:0; animation:fadeUp 0.65s ease forwards; }
-    .fade-up:nth-child(1){animation-delay:0.1s} .fade-up:nth-child(2){animation-delay:0.22s} .fade-up:nth-child(3){animation-delay:0.36s} .fade-up:nth-child(4){animation-delay:0.5s}
+    /* ── RADIO PLAYER ── */
+    #radio-player { position:fixed; bottom:0; left:0; right:0; z-index:200; height:64px; background:rgba(8,10,14,0.97); border-top:1px solid rgba(232,160,32,0.15); backdrop-filter:blur(16px); display:flex; align-items:center; padding:0 5vw; gap:18px; }
+    .radio-logo { display:flex; align-items:center; gap:9px; flex-shrink:0; }
+    .radio-logo-mark { width:26px; height:26px; background:var(--amber); border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .radio-logo-mark svg { width:12px; height:12px; }
+    .radio-name { font-family:var(--font-d); font-weight:800; font-size:12px; letter-spacing:0.14em; color:var(--text); line-height:1; }
+    .radio-name span { display:block; font-size:8px; font-weight:600; letter-spacing:0.2em; color:var(--amber); margin-top:2px; }
+    .radio-divider { width:1px; height:24px; background:var(--border); flex-shrink:0; }
+    .radio-play { width:34px; height:34px; border-radius:50%; background:var(--amber); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s,transform 0.15s; flex-shrink:0; }
+    .radio-play:hover { background:var(--amber-dim); transform:scale(1.06); }
+    .radio-play svg { width:12px; height:12px; fill:#000; }
+    .radio-info { flex:1; min-width:0; }
+    .radio-status { font-size:12px; color:var(--muted); }
+    .radio-status.live { color:var(--text); }
+    .radio-live-dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#F87171; margin-right:5px; animation:pulse 1.4s ease-in-out infinite; vertical-align:middle; }
+    .radio-vol { display:flex; align-items:center; gap:7px; flex-shrink:0; }
+    .radio-vol svg { width:13px; height:13px; fill:var(--muted); flex-shrink:0; }
+    .radio-vol input[type=range] { -webkit-appearance:none; width:72px; height:3px; background:var(--subtle); border-radius:2px; outline:none; cursor:pointer; }
+    .radio-vol input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:11px; height:11px; border-radius:50%; background:var(--amber); cursor:pointer; }
+    .radio-vol input[type=range]::-moz-range-thumb { width:11px; height:11px; border-radius:50%; border:none; background:var(--amber); cursor:pointer; }
 
-    /* Responsive */
-    @media(max-width:900px) {
-      .nav-links { display:none; }
-      .about-grid,.activity-grid { grid-template-columns:1fr; gap:24px; }
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { opacity:0; animation:fadeUp 0.6s ease forwards; }
+    .fade-up:nth-child(1){animation-delay:0.05s} .fade-up:nth-child(2){animation-delay:0.15s} .fade-up:nth-child(3){animation-delay:0.27s} .fade-up:nth-child(4){animation-delay:0.4s}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:860px) {
+      .about-grid,.activity-grid { grid-template-columns:1fr; gap:20px; }
       .features-grid { grid-template-columns:1fr 1fr; }
       .join-steps { grid-template-columns:1fr; }
-      footer { flex-direction:column; gap:14px; text-align:center; }
-      .stats-grid { grid-template-columns:1fr; }
+      footer { flex-direction:column; gap:12px; text-align:center; }
+      .stats-inner { grid-template-columns:1fr; }
       .milestone-inner { flex-direction:column; text-align:center; }
+      .radio-vol { display:none; }
+      .radio-divider { display:none; }
     }
     @media(max-width:600px) {
       .features-grid { grid-template-columns:1fr; }
+      .hero { min-height:75vh; padding:70px 5vw 50px; }
+      .pillars { grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -256,14 +256,30 @@
   </a>
   <ul class="nav-links">
     <li><a href="#activity">Activity</a></li>
+    <li><a href="#hub">Hub</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#join">Join</a></li>
     <li><a href="https://drivers.hyperionvtc.com" target="_blank">Drivers Hub</a></li>
     <li><a href="https://hyperion.fm" target="_blank">Radio</a></li>
     <li><a href="https://discord.gg/KaVtpMR6Zs" target="_blank" class="nav-discord">Discord</a></li>
     <li><a href="https://drivers.hyperionvtc.com/apply" class="nav-cta">Apply Now</a></li>
   </ul>
+  <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <svg id="ham-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M3 6h18M3 12h18M3 18h18"/>
+    </svg>
+  </button>
 </nav>
+
+<!-- Mobile nav -->
+<div class="nav-mobile" id="nav-mobile">
+  <a href="#activity" onclick="closeMobileNav()">Activity</a>
+  <a href="#hub" onclick="closeMobileNav()">Hub</a>
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="https://drivers.hyperionvtc.com" target="_blank">Drivers Hub ↗</a>
+  <a href="https://hyperion.fm" target="_blank">Radio ↗</a>
+  <a href="https://discord.gg/KaVtpMR6Zs" target="_blank">Discord ↗</a>
+  <a href="https://drivers.hyperionvtc.com/apply" class="m-cta">Apply Now →</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -271,25 +287,30 @@
   <div class="hero-line"></div>
   <div class="hero-content">
     <div class="hero-tag fade-up">Virtual Trucking Company · ATS &amp; ETS2</div>
-    <h1 class="fade-up">Built for<br><em>the road.</em></h1>
-    <p class="hero-desc fade-up">Carry the weight of the world.<br><span style="font-size:15px;opacity:0.7;">A community-driven VTC for ATS &amp; ETS2. Join a crew of dedicated drivers, track your career, and haul together.</span></p>
+    <h1 class="fade-up">Drive with people<br><em>who give a damn.</em></h1>
+    <p class="hero-sub fade-up">A tight crew, a custom-built hub, and room for drivers who take the sim seriously. We're small and growing — which means now is the best time to get in.</p>
+    <div class="hero-proof fade-up">
+      <span class="proof-badge">Free to join</span>
+      <span class="proof-badge">ATS &amp; ETS2</span>
+      <span class="proof-badge">Custom drivers hub</span>
+      <span class="proof-badge">No mileage minimums</span>
+    </div>
     <div class="hero-actions fade-up">
       <a href="https://drivers.hyperionvtc.com/apply" class="btn-primary">
         Apply to Join
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="https://discord.gg/KaVtpMR6Zs" target="_blank" class="btn-discord">
-        <svg width="18" height="14" viewBox="0 0 24 18" fill="currentColor"><path d="M20.317 1.492a19.82 19.82 0 00-4.885-1.515.074.074 0 00-.079.037 13.84 13.84 0 00-.6 1.228 18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.228.077.077 0 00-.079-.037A19.74 19.74 0 003.677 1.49a.07.07 0 00-.032.027C.533 6.093-.32 10.555.099 14.961a.08.08 0 00.031.055 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.1 13.1 0 01-1.872-.892.077.077 0 01-.008-.128c.126-.094.252-.192.372-.292a.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.099.246.198.373.292a.077.077 0 01-.006.127 12.3 12.3 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.84 19.84 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+      <a href="https://discord.gg/KaVtpMR6Zs" target="_blank" class="btn-ghost">
+        <svg width="16" height="13" viewBox="0 0 24 18" fill="#7289DA"><path d="M20.317 1.492a19.82 19.82 0 00-4.885-1.515.074.074 0 00-.079.037 13.84 13.84 0 00-.6 1.228 18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.228.077.077 0 00-.079-.037A19.74 19.74 0 003.677 1.49a.07.07 0 00-.032.027C.533 6.093-.32 10.555.099 14.961a.08.08 0 00.031.055 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.1 13.1 0 01-1.872-.892.077.077 0 01-.008-.128c.126-.094.252-.192.372-.292a.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.099.246.198.373.292a.077.077 0 01-.006.127 12.3 12.3 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.84 19.84 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
         Join Discord
       </a>
-      <a href="#activity" class="btn-secondary">See live activity <span>→</span></a>
     </div>
   </div>
 </section>
 
-<!-- LIVE STATS -->
+<!-- LIVE STATS — immediately below the fold -->
 <div class="stats-strip">
-  <div class="stats-grid">
+  <div class="stats-inner">
     <div class="stat-cell">
       <div class="stat-value loading" id="stat-members">—</div>
       <div class="stat-label">Active Drivers</div>
@@ -306,7 +327,7 @@
 </div>
 
 <!-- LATEST MILESTONE -->
-<div class="milestone-banner hidden" id="milestone-banner" style="padding-top:28px; padding-bottom:0;">
+<div class="milestone-banner hidden" id="milestone-banner">
   <div class="milestone-inner">
     <div class="emoji" id="milestone-emoji">🏆</div>
     <div class="text">
@@ -322,7 +343,6 @@
   <div class="section-tag">Live Activity</div>
   <h2>What's happening<br>right now</h2>
   <div class="activity-grid">
-    <!-- Recent jobs feed -->
     <div class="activity-card">
       <div class="activity-card-header">
         <span class="activity-card-title">Recent Deliveries</span>
@@ -332,10 +352,7 @@
         <div class="feed-empty">Loading...</div>
       </div>
     </div>
-
-    <!-- Right column: top drivers + upcoming events -->
-    <div style="display:flex;flex-direction:column;gap:16px;">
-      <!-- Top drivers -->
+    <div style="display:flex;flex-direction:column;gap:14px;">
       <div class="activity-card">
         <div class="activity-card-header">
           <span class="activity-card-title">🏆 Top Drivers</span>
@@ -344,72 +361,138 @@
           <div class="feed-empty">Loading...</div>
         </div>
       </div>
-
-      <!-- Upcoming events -->
       <div class="activity-card" id="events-card">
         <div class="activity-card-header">
           <span class="activity-card-title">📅 Upcoming Events</span>
         </div>
-        <div id="events-list" style="padding:16px 20px;">
-          <div class="feed-empty">Loading...</div>
+        <div style="padding:14px 18px;" id="events-list">
+          <div class="events-empty">Loading...</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid">
-    <div>
-      <div class="section-tag">Who we are</div>
-      <h2>Built on<br>something older.</h2>
-      <p class="about-body">Hyperion was the Titan of light — one who bore the heavens on his shoulders. We named our VTC after him because we believe in carrying something worth carrying. Community, consistency, and the open road.</p>
-      <p class="about-body">Whether you're hauling solo or rolling with the crew on a convoy, Hyperion gives you the tools to track every kilometre, earn XP, unlock achievements, and climb the ranks.</p>
-      <div class="games-strip">
-        <span class="game-badge ats">🇺🇸 American Truck Simulator</span>
-        <span class="game-badge ets">🇪🇺 Euro Truck Simulator 2</span>
+<!-- HUB FEATURES -->
+<section id="hub" class="hub-section">
+  <div class="hub-inner">
+    <div class="section-tag">The Drivers Hub</div>
+    <div class="hub-custom-badge">
+      ✦ Built from scratch — not a template
+    </div>
+    <h2 style="margin-bottom:12px;">Everything in<br>one place.</h2>
+    <p class="hub-intro">A fully custom drivers portal built exclusively for Hyperion. Automatic job sync, XP progression, route maps, achievements and more — no spreadsheets, no third-party tools.</p>
+    <div class="features-grid">
+      <div class="feature-cell">
+        <div class="feature-icon">🚛</div>
+        <div class="feature-title">Auto Job Sync</div>
+        <div class="feature-body">Every delivery logs automatically via Trucky. No manual entry, no copy-pasting.</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">XP & Ranks</div>
+        <div class="feature-body">Earn XP every haul. Long haul bonuses, clean delivery rewards, streak multipliers. Rookie to Legend.</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon">🗺️</div>
+        <div class="feature-title">Route Map</div>
+        <div class="feature-body">Every route you've driven plotted on a real interactive map. Thicker lines for routes you frequent.</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon">🏗️</div>
+        <div class="feature-title">Divisions</div>
+        <div class="feature-body">Join a specialised crew — Hazmat, Flatbed, Tanker and more. Division cargo earns bonus XP.</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon">🏆</div>
+        <div class="feature-title">Achievements</div>
+        <div class="feature-body">15 auto-unlocking achievements including streak milestones, distance records, and clean delivery streaks.</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon">📅</div>
+        <div class="feature-title">Convoy Events</div>
+        <div class="feature-body">Staff-organised convoys with full route info, server details, DLC requirements and Discord voice links.</div>
       </div>
     </div>
-    <div class="pillars">
-      <div class="pillar"><span class="pillar-icon">🚛</span><div class="pillar-title">Job Tracking</div><div class="pillar-body">Every delivery logged automatically via Trucky integration.</div></div>
-      <div class="pillar"><span class="pillar-icon">⚡</span><div class="pillar-title">XP &amp; Ranks</div><div class="pillar-body">Earn points, unlock achievements, and climb from Rookie to Legend.</div></div>
-      <div class="pillar"><span class="pillar-icon">🏗️</span><div class="pillar-title">Divisions</div><div class="pillar-body">Join a specialised division — Hazmat, Flatbed, Tanker and more.</div></div>
-      <div class="pillar"><span class="pillar-icon">🎯</span><div class="pillar-title">Challenges</div><div class="pillar-body">Monthly challenges with bonus XP rewards for top performers.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="features-section">
-  <div class="section-tag">The Drivers Hub</div>
-  <h2 style="margin-bottom:12px;">Everything in<br>one place.</h2>
-  <p style="font-size:15px;font-weight:300;color:rgba(240,238,232,0.45);margin-bottom:32px;max-width:480px;">A fully custom drivers portal built exclusively for Hyperion — not a template, not a third-party tool.</p>
-  <div class="features-grid">
-    <div class="feature-cell"><div class="feature-icon">📊</div><div class="feature-title">Stats Deep Dive</div><div class="feature-body">Weekly charts, top cargo, favourite routes, personal bests — your full career in numbers.</div></div>
-    <div class="feature-cell"><div class="feature-icon">🔥</div><div class="feature-title">Streak Tracking</div><div class="feature-body">Build a weekly driving streak and earn milestone XP rewards for consistency.</div></div>
-    <div class="feature-cell"><div class="feature-icon">🏆</div><div class="feature-title">Achievements</div><div class="feature-body">10+ auto-unlocking achievements from First Delivery to Year Round Driver.</div></div>
-    <div class="feature-cell"><div class="feature-icon">✍️</div><div class="feature-title">Trip Reports</div><div class="feature-body">Write a report on any haul — attach a screenshot and share the highlights.</div></div>
-    <div class="feature-cell"><div class="feature-icon">📅</div><div class="feature-title">Convoy Events</div><div class="feature-body">RSVP to convoy events with full route info, server, DLC requirements and voice channel links.</div></div>
-    <div class="feature-cell"><div class="feature-icon">🗺️</div><div class="feature-title">Milestones Wall</div><div class="feature-body">A permanent record of every VTC achievement, with the driver who pushed it over the line.</div></div>
+    <a href="https://drivers.hyperionvtc.com" target="_blank" class="hub-cta">
+      Explore the hub → drivers.hyperionvtc.com
+    </a>
   </div>
 </section>
 
 <!-- JOIN -->
 <section id="join" class="join-section">
   <div class="join-inner">
-    <div class="section-tag" style="justify-content:center;">How to join</div>
-    <h2>Ready to haul<br>with Hyperion?</h2>
-    <p>Applying takes less than 5 minutes. Fill out a short form, get reviewed by our team, and you'll be on the road with us in no time.</p>
+    <div class="section-tag" style="justify-content:center;">Join Hyperion</div>
+    <h2>Ready to haul<br>with us?</h2>
+    <p>We're a small, tight crew that takes the sim seriously. Ground floor of something built to last — now is the best time to join.</p>
     <div class="join-steps">
-      <div class="join-step"><div class="step-num">01</div><div class="step-title">Apply</div><div class="step-body">Fill out our short application form. Tell us a bit about yourself and your trucking experience.</div></div>
-      <div class="join-step"><div class="step-num">02</div><div class="step-title">Get Reviewed</div><div class="step-body">Our staff reviews your application and reaches out via Discord DM.</div></div>
-      <div class="join-step"><div class="step-num">03</div><div class="step-title">Start Hauling</div><div class="step-body">Sign into the Drivers Hub, install Trucky, and your career begins.</div></div>
+      <div class="join-step">
+        <div class="step-num">01</div>
+        <div class="step-title">Apply</div>
+        <div class="step-body">Fill out a short application on the Drivers Hub. Takes 2 minutes. No experience required.</div>
+      </div>
+      <div class="join-step">
+        <div class="step-num">02</div>
+        <div class="step-title">Get accepted</div>
+        <div class="step-body">Our team reviews applications quickly. You'll hear back via Discord DM.</div>
+      </div>
+      <div class="join-step">
+        <div class="step-num">03</div>
+        <div class="step-title">Start hauling</div>
+        <div class="step-body">Log in, pick a division, complete your first job. Everything syncs automatically.</div>
+      </div>
     </div>
-    <a href="https://drivers.hyperionvtc.com/apply" class="btn-primary" style="font-size:16px;padding:16px 44px;">
-      Apply Now
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
+    <div class="join-actions">
+      <a href="https://drivers.hyperionvtc.com/apply" class="btn-primary">
+        Apply Now — It's Free
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://discord.gg/KaVtpMR6Zs" target="_blank" class="btn-discord-lg">
+        <svg width="16" height="13" viewBox="0 0 24 18" fill="currentColor"><path d="M20.317 1.492a19.82 19.82 0 00-4.885-1.515.074.074 0 00-.079.037 13.84 13.84 0 00-.6 1.228 18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.228.077.077 0 00-.079-.037A19.74 19.74 0 003.677 1.49a.07.07 0 00-.032.027C.533 6.093-.32 10.555.099 14.961a.08.08 0 00.031.055 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.1 13.1 0 01-1.872-.892.077.077 0 01-.008-.128c.126-.094.252-.192.372-.292a.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.099.246.198.373.292a.077.077 0 01-.006.127 12.3 12.3 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.84 19.84 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+        Join Discord
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="about-grid">
+    <div>
+      <div class="section-tag">About Hyperion</div>
+      <h2>Built on<br>something older.</h2>
+      <p class="about-body">Hyperion was the Titan of light — one who bore the heavens on his shoulders. We named our VTC after him because we believe in carrying something worth carrying. Community, consistency, and the open road.</p>
+      <p class="about-body">We're not trying to be the biggest VTC. Just one of the better ones.</p>
+      <div class="games-strip">
+        <span class="game-badge ats">🇺🇸 American Truck Simulator</span>
+        <span class="game-badge ets">🇪🇺 Euro Truck Simulator 2</span>
+      </div>
+    </div>
+    <div>
+      <div class="pillars">
+        <div class="pillar">
+          <span class="pillar-icon">🤝</span>
+          <div class="pillar-title">Community first</div>
+          <div class="pillar-body">Small enough to know your name. Active enough to always find someone to haul with.</div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">🛠️</span>
+          <div class="pillar-title">Proper tools</div>
+          <div class="pillar-body">A custom-built hub — not a Google Sheet. Every feature exists because drivers asked for it.</div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">🚦</span>
+          <div class="pillar-title">No pressure</div>
+          <div class="pillar-body">No minimum mileage. Drive when you can. We track everything so nothing gets missed.</div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">📡</span>
+          <div class="pillar-title">Always on</div>
+          <div class="pillar-body">Hyperion Radio streams 24/7. The hub is live. The Discord is active. We're always here.</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -427,168 +510,11 @@
   </div>
 </footer>
 
-<script>
-const API = 'https://drivers.hyperionvtc.com/api/public/stats';
-const medals = ['🥇','🥈','🥉'];
-
-function timeAgo(iso) {
-  if (!iso) return '';
-  const diff = Date.now() - new Date(iso).getTime();
-  const m = Math.floor(diff / 60000);
-  const h = Math.floor(diff / 3600000);
-  const d = Math.floor(diff / 86400000);
-  if (m < 1) return 'just now';
-  if (m < 60) return m + 'm ago';
-  if (h < 24) return h + 'h ago';
-  return d + 'd ago';
-}
-
-function fmt(n) {
-  if (n >= 1000000) return (n/1000000).toFixed(1) + 'M';
-  if (n >= 1000) return (n/1000).toFixed(1) + 'K';
-  return String(n);
-}
-
-function setLoad(id, val) {
-  const el = document.getElementById(id);
-  el.textContent = val;
-  el.classList.remove('loading');
-}
-
-function renderFeed(feed) {
-  const el = document.getElementById('feed-list');
-  if (!feed || feed.length === 0) {
-    el.innerHTML = '<div class="feed-empty">No jobs logged yet — check back soon!</div>';
-    return;
-  }
-  el.innerHTML = feed.map(j => `
-    <div class="feed-item">
-      <img class="feed-avatar" src="${j.avatarUrl || ''}" onerror="this.style.background='#1C1F27';this.style.visibility='hidden'" />
-      <div class="feed-body">
-        <div class="feed-text"><strong>${j.username}</strong> <span class="dim">hauled</span> ${j.cargo || 'cargo'}</div>
-        <div class="feed-sub">
-          <span>${j.originCity} → ${j.destinationCity}</span>
-          ${j.distanceKm ? `<span>${j.distanceKm.toLocaleString()} km</span>` : ''}
-        </div>
-      </div>
-      <div class="feed-meta">
-        <span class="game-pill ${j.game === 'ATS' ? 'ats' : 'ets'}">${j.game}</span>
-        <span class="time-ago">${timeAgo(j.finishedAt)}</span>
-      </div>
-    </div>
-  `).join('');
-}
-
-function renderDrivers(drivers) {
-  const el = document.getElementById('drivers-list');
-  if (!drivers || drivers.length === 0) {
-    el.innerHTML = '<div class="feed-empty">No drivers yet</div>';
-    return;
-  }
-  el.innerHTML = drivers.map((d, i) => `
-    <div class="driver-item">
-      <div class="driver-pos">${medals[i]}</div>
-      <img class="driver-avatar" src="${d.avatarUrl || ''}" onerror="this.style.background='#1C1F27';this.style.visibility='hidden'" />
-      <div class="driver-info">
-        <div class="driver-name">${d.username}</div>
-        <div class="driver-rank" style="color:${d.rank.color}">${d.rank.icon} ${d.rank.name}</div>
-      </div>
-      <div class="driver-xp">${fmt(d.totalXp)} <span>XP</span></div>
-    </div>
-  `).join('');
-}
-
-function renderEvents(events) {
-  const el = document.getElementById('events-list');
-  const card = document.getElementById('events-card');
-  if (!events || events.length === 0) {
-    card.style.display = 'none';
-    return;
-  }
-  el.innerHTML = events.map(e => {
-    const d = new Date(e.eventDate);
-    const day = d.getDate();
-    const month = d.toLocaleDateString('en-CA', { month: 'short' });
-    const time = d.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' });
-    return `
-      <div class="event-card" style="padding:14px;margin-bottom:10px;background:var(--bg4)">
-        <div class="event-date-box">
-          <div class="event-date-day">${day}</div>
-          <div class="event-date-month">${month}</div>
-        </div>
-        <div class="event-info">
-          <div class="event-title">${e.title}</div>
-          <div class="event-meta">${time}${e.game ? ' · ' + e.game : ''}${e.server ? ' · ' + e.server : ''}</div>
-          ${e.startCity && e.endCity ? `<div class="event-route">🚛 ${e.startCity} → ${e.endCity}</div>` : ''}
-          <div class="event-meta" style="margin-top:4px;">${e.attendeeCount} attending</div>
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function renderMilestone(m) {
-  if (!m) return;
-  const banner = document.getElementById('milestone-banner');
-  document.getElementById('milestone-emoji').textContent = m.emoji;
-  document.getElementById('milestone-title').textContent = m.title;
-  const d = m.achievedAt ? new Date(m.achievedAt).toLocaleDateString('en-CA', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
-  document.getElementById('milestone-meta').textContent =
-    `Achieved ${d}${m.triggeredBy ? ' · pushed over the line by ' + m.triggeredBy : ''}`;
-  banner.classList.remove('hidden');
-}
-
-async function loadData() {
-  try {
-    const res = await fetch(API);
-    const data = await res.json();
-
-    setLoad('stat-members', data.members);
-    setLoad('stat-jobs', fmt(data.jobs));
-    setLoad('stat-distance', fmt(data.distanceKm));
-
-    renderFeed(data.feed);
-    renderDrivers(data.topDrivers);
-    renderEvents(data.upcomingEvents);
-    renderMilestone(data.latestMilestone);
-  } catch(e) {
-    console.warn('Could not load stats:', e);
-    ['stat-members','stat-jobs','stat-distance'].forEach(id => {
-      const el = document.getElementById(id);
-      el.textContent = '—';
-      el.classList.remove('loading');
-    });
-    document.getElementById('feed-list').innerHTML = '<div class="feed-empty">Unable to load live data</div>';
-    document.getElementById('drivers-list').innerHTML = '<div class="feed-empty">Unable to load</div>';
-  }
-}
-
-loadData();
-
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.opacity = '1';
-      e.target.style.transform = 'translateY(0)';
-    }
-  });
-}, { threshold: 0.08 });
-
-document.querySelectorAll('.pillar,.feature-cell,.join-step,.activity-card').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(18px)';
-  el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
-  observer.observe(el);
-});
-</script>
-
+<!-- RADIO PLAYER -->
 <div id="radio-player">
   <audio id="radio-audio" preload="none">
     <source src="https://s5.radio.co/s2b6af2e87/listen" type="audio/mpeg">
   </audio>
-
-  <!-- Logo -->
   <div class="radio-logo">
     <div class="radio-logo-mark">
       <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -597,21 +523,14 @@ document.querySelectorAll('.pillar,.feature-cell,.join-step,.activity-card').for
     </div>
     <div class="radio-name">Hyperion Radio<span>LIVE STREAM</span></div>
   </div>
-
   <div class="radio-divider"></div>
-
-  <!-- Play/Pause -->
   <button class="radio-play" id="radio-btn" aria-label="Play Hyperion Radio" onclick="toggleRadio()">
     <svg id="radio-icon-play" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
     <svg id="radio-icon-pause" viewBox="0 0 24 24" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
   </button>
-
-  <!-- Info -->
   <div class="radio-info">
     <div class="radio-status" id="radio-status">Click to tune in</div>
   </div>
-
-  <!-- Volume -->
   <div class="radio-vol">
     <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14"/></svg>
     <input type="range" id="radio-volume" min="0" max="1" step="0.05" value="0.8" oninput="setVolume(this.value)" aria-label="Volume">
@@ -619,69 +538,173 @@ document.querySelectorAll('.pillar,.feature-cell,.join-step,.activity-card').for
 </div>
 
 <script>
+// ── Mobile nav ──
+function toggleMobileNav() {
+  var nav = document.getElementById('nav-mobile');
+  nav.classList.toggle('open');
+}
+function closeMobileNav() {
+  document.getElementById('nav-mobile').classList.remove('open');
+}
+
+// ── Radio ──
 (function() {
   var audio = document.getElementById('radio-audio');
-  var btn   = document.getElementById('radio-btn');
   var iPlay = document.getElementById('radio-icon-play');
-  var iPause= document.getElementById('radio-icon-pause');
-  var status= document.getElementById('radio-status');
-  var vol   = document.getElementById('radio-volume');
+  var iPause = document.getElementById('radio-icon-pause');
+  var status = document.getElementById('radio-status');
   var playing = false;
-
   audio.volume = 0.8;
-
   window.toggleRadio = function() {
     if (playing) {
-      audio.pause();
-      audio.src = '';
-      playing = false;
-      iPlay.style.display = '';
-      iPause.style.display = 'none';
-      status.className = 'radio-status';
-      status.innerHTML = 'Click to tune in';
+      audio.pause(); audio.src = ''; playing = false;
+      iPlay.style.display = ''; iPause.style.display = 'none';
+      status.className = 'radio-status'; status.innerHTML = 'Click to tune in';
     } else {
-      status.className = 'radio-status';
-      status.innerHTML = 'Connecting…';
-      // Re-assign src to bypass browser cache and force reconnect
+      status.className = 'radio-status'; status.innerHTML = 'Connecting…';
       audio.src = 'https://s5.radio.co/s2b6af2e87/listen';
       audio.load();
       audio.play().then(function() {
-        playing = true;
-        iPlay.style.display = 'none';
-        iPause.style.display = '';
+        playing = true; iPlay.style.display = 'none'; iPause.style.display = '';
         status.className = 'radio-status live';
         status.innerHTML = '<span class="radio-live-dot"></span>Live — Hyperion Radio';
-      }).catch(function() {
-        status.className = 'radio-status';
-        status.innerHTML = 'Stream unavailable';
-      });
+      }).catch(function() { status.className = 'radio-status'; status.innerHTML = 'Stream unavailable'; });
     }
   };
-
-  window.setVolume = function(v) {
-    audio.volume = parseFloat(v);
-  };
-
+  window.setVolume = function(v) { audio.volume = parseFloat(v); };
   audio.addEventListener('error', function() {
-    playing = false;
-    iPlay.style.display = '';
-    iPause.style.display = 'none';
-    status.className = 'radio-status';
-    status.innerHTML = 'Stream unavailable — try again';
+    playing = false; iPlay.style.display = ''; iPause.style.display = 'none';
+    status.className = 'radio-status'; status.innerHTML = 'Stream unavailable — try again';
   });
-
-  audio.addEventListener('waiting', function() {
-    if (playing) status.innerHTML = '<span class="radio-live-dot"></span>Buffering…';
-  });
-
   audio.addEventListener('playing', function() {
-    playing = true;
-    iPlay.style.display = 'none';
-    iPause.style.display = '';
+    playing = true; iPlay.style.display = 'none'; iPause.style.display = '';
     status.className = 'radio-status live';
     status.innerHTML = '<span class="radio-live-dot"></span>Live — Hyperion Radio';
   });
 })();
+
+// ── Live data ──
+function timeAgo(iso) {
+  var diff = Date.now() - new Date(iso).getTime();
+  var m = Math.floor(diff / 60000), h = Math.floor(m / 60), d = Math.floor(h / 24);
+  if (d > 0) return d + 'd ago';
+  if (h > 0) return h + 'h ago';
+  if (m > 0) return m + 'm ago';
+  return 'just now';
+}
+
+function formatNum(n) {
+  if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+  return String(n);
+}
+
+async function loadData() {
+  try {
+    var res = await fetch('https://drivers.hyperionvtc.com/api/public/stats');
+    if (!res.ok) throw new Error();
+    var d = await res.json();
+
+    // Stats
+    ['members','jobs','distance'].forEach(function(k) {
+      var el = document.getElementById('stat-' + k);
+      if (el && d.vtc) {
+        var val = k === 'members' ? d.vtc.memberCount : k === 'jobs' ? d.vtc.totalJobs : d.vtc.totalDistanceKm;
+        el.textContent = formatNum(Math.round(val));
+        el.classList.remove('loading');
+      }
+    });
+
+    // Milestone
+    if (d.latestMilestone) {
+      var m = d.latestMilestone;
+      document.getElementById('milestone-emoji').textContent = m.emoji || '🏆';
+      document.getElementById('milestone-title').textContent = m.title;
+      document.getElementById('milestone-meta').textContent = m.achievedAt ? 'Achieved ' + timeAgo(m.achievedAt) : '';
+      document.getElementById('milestone-banner').classList.remove('hidden');
+    }
+
+    // Feed
+    var feedEl = document.getElementById('feed-list');
+    if (d.recentJobs && d.recentJobs.length) {
+      feedEl.innerHTML = d.recentJobs.slice(0, 8).map(function(j) {
+        var game = j.game === 'ATS' ? 'ats' : 'ets';
+        return '<div class="feed-item">'
+          + (j.avatarUrl ? '<img class="feed-avatar" src="' + j.avatarUrl + '" alt="">' : '<div class="feed-avatar"></div>')
+          + '<div class="feed-body"><div class="feed-text"><strong>' + j.username + '</strong> <span class="dim">delivered</span> ' + (j.cargo || 'cargo') + '</div>'
+          + '<div class="feed-sub">' + j.originCity + ' → ' + j.destinationCity
+          + (j.distanceKm ? ' · ' + Math.round(j.distanceKm) + ' km' : '') + '</div></div>'
+          + '<div class="feed-meta"><span class="game-pill ' + game + '">' + j.game + '</span><span class="time-ago">' + timeAgo(j.finishedAt) + '</span></div>'
+          + '</div>';
+      }).join('');
+    } else {
+      feedEl.innerHTML = '<div class="feed-empty">No deliveries yet — be the first!</div>';
+    }
+
+    // Top drivers
+    var dEl = document.getElementById('drivers-list');
+    var medals = ['🥇','🥈','🥉'];
+    if (d.topDrivers && d.topDrivers.length) {
+      dEl.innerHTML = d.topDrivers.slice(0, 5).map(function(dr, i) {
+        return '<div class="driver-item">'
+          + '<div class="driver-pos">' + (i < 3 ? medals[i] : '#' + (i+1)) + '</div>'
+          + (dr.avatarUrl ? '<img class="driver-avatar" src="' + dr.avatarUrl + '" alt="">' : '<div class="driver-avatar"></div>')
+          + '<div class="driver-info"><div class="driver-name">' + dr.username + '</div>'
+          + '<div class="driver-rank" style="color:' + (dr.rank && dr.rank.color || '#7A7870') + '">'
+          + (dr.rank ? dr.rank.icon + ' ' + dr.rank.name : '') + '</div></div>'
+          + '<div class="driver-xp">' + formatNum(dr.totalXp) + ' <span>XP</span></div>'
+          + '</div>';
+      }).join('');
+    } else {
+      dEl.innerHTML = '<div class="feed-empty">No drivers yet!</div>';
+    }
+
+    // Events
+    var eEl = document.getElementById('events-list');
+    if (d.upcomingEvents && d.upcomingEvents.length) {
+      eEl.innerHTML = d.upcomingEvents.slice(0, 3).map(function(ev) {
+        var dt = new Date(ev.eventDate);
+        var day = dt.getDate();
+        var mon = dt.toLocaleString('en-CA', { month: 'short' }).toUpperCase();
+        return '<div class="event-card" style="margin-bottom:10px;last-child:margin-bottom:0">'
+          + '<div class="event-date-box"><div class="event-date-day">' + day + '</div><div class="event-date-month">' + mon + '</div></div>'
+          + '<div class="event-info"><div class="event-title">' + ev.title + '</div>'
+          + '<div class="event-meta">' + (ev.attendees || 0) + ' attending</div>'
+          + (ev.startCity && ev.endCity ? '<div class="event-route">📍 ' + ev.startCity + ' → ' + ev.endCity + '</div>' : '')
+          + '</div></div>';
+      }).join('');
+    } else {
+      eEl.innerHTML = '<div class="events-empty">No upcoming events — check back soon.</div>';
+    }
+
+  } catch(e) {
+    ['members','jobs','distance'].forEach(function(k) {
+      var el = document.getElementById('stat-' + k);
+      if (el) { el.textContent = '—'; el.classList.remove('loading'); }
+    });
+    document.getElementById('feed-list').innerHTML = '<div class="feed-empty">Unable to load live data</div>';
+    document.getElementById('drivers-list').innerHTML = '<div class="feed-empty">Unable to load</div>';
+  }
+}
+
+loadData();
+
+// ── Scroll reveal ──
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.07 });
+
+document.querySelectorAll('.pillar,.feature-cell,.join-step,.activity-card').forEach(function(el) {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(16px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
 </script>
 
 </body>
