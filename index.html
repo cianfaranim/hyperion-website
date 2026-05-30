@@ -605,17 +605,17 @@ async function loadData() {
     if (!res.ok) throw new Error();
     var d = await res.json();
 
-    // Stats
+    // Stats — API returns: members, jobs, distanceKm
+    var statMap = { members: d.members, jobs: d.jobs, distance: d.distanceKm };
     ['members','jobs','distance'].forEach(function(k) {
       var el = document.getElementById('stat-' + k);
-      if (el && d.vtc) {
-        var val = k === 'members' ? d.vtc.memberCount : k === 'jobs' ? d.vtc.totalJobs : d.vtc.totalDistanceKm;
-        el.textContent = formatNum(Math.round(val));
+      if (el && statMap[k] !== undefined) {
+        el.textContent = formatNum(Math.round(statMap[k]));
         el.classList.remove('loading');
       }
     });
 
-    // Milestone
+    // Milestone — API returns: latestMilestone
     if (d.latestMilestone) {
       var m = d.latestMilestone;
       document.getElementById('milestone-emoji').textContent = m.emoji || '🏆';
@@ -624,10 +624,10 @@ async function loadData() {
       document.getElementById('milestone-banner').classList.remove('hidden');
     }
 
-    // Feed
+    // Feed — API returns: feed
     var feedEl = document.getElementById('feed-list');
-    if (d.recentJobs && d.recentJobs.length) {
-      feedEl.innerHTML = d.recentJobs.slice(0, 8).map(function(j) {
+    if (d.feed && d.feed.length) {
+      feedEl.innerHTML = d.feed.slice(0, 8).map(function(j) {
         var game = j.game === 'ATS' ? 'ats' : 'ets';
         return '<div class="feed-item">'
           + (j.avatarUrl ? '<img class="feed-avatar" src="' + j.avatarUrl + '" alt="">' : '<div class="feed-avatar"></div>')
@@ -641,7 +641,7 @@ async function loadData() {
       feedEl.innerHTML = '<div class="feed-empty">No deliveries yet — be the first!</div>';
     }
 
-    // Top drivers
+    // Top drivers — API returns: topDrivers
     var dEl = document.getElementById('drivers-list');
     var medals = ['🥇','🥈','🥉'];
     if (d.topDrivers && d.topDrivers.length) {
@@ -659,17 +659,17 @@ async function loadData() {
       dEl.innerHTML = '<div class="feed-empty">No drivers yet!</div>';
     }
 
-    // Events
+    // Events — API returns: upcomingEvents with attendeeCount
     var eEl = document.getElementById('events-list');
     if (d.upcomingEvents && d.upcomingEvents.length) {
       eEl.innerHTML = d.upcomingEvents.slice(0, 3).map(function(ev) {
         var dt = new Date(ev.eventDate);
         var day = dt.getDate();
         var mon = dt.toLocaleString('en-CA', { month: 'short' }).toUpperCase();
-        return '<div class="event-card" style="margin-bottom:10px;last-child:margin-bottom:0">'
+        return '<div class="event-card" style="margin-bottom:10px">'
           + '<div class="event-date-box"><div class="event-date-day">' + day + '</div><div class="event-date-month">' + mon + '</div></div>'
           + '<div class="event-info"><div class="event-title">' + ev.title + '</div>'
-          + '<div class="event-meta">' + (ev.attendees || 0) + ' attending</div>'
+          + '<div class="event-meta">' + (ev.attendeeCount || 0) + ' attending</div>'
           + (ev.startCity && ev.endCity ? '<div class="event-route">📍 ' + ev.startCity + ' → ' + ev.endCity + '</div>' : '')
           + '</div></div>';
       }).join('');
