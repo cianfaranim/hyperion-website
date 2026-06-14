@@ -131,6 +131,8 @@
     .feature-icon { font-size:24px; margin-bottom:10px; }
     .feature-title { font-family:var(--font-d); font-size:15px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--text); margin-bottom:5px; }
     .feature-body { font-size:12px; color:var(--muted); line-height:1.6; }
+    .feature-cell.new { position:relative; }
+    .feature-new-badge { display:inline-block; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#000; background:var(--amber); border-radius:4px; padding:2px 6px; margin-bottom:8px; }
     .hub-cta { display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:13px; text-decoration:none; transition:color 0.2s; }
     .hub-cta:hover { color:var(--text); }
 
@@ -381,17 +383,23 @@
       ✦ Built from scratch — not a template
     </div>
     <h2 style="margin-bottom:12px;">Everything in<br>one place.</h2>
-    <p class="hub-intro">A fully custom drivers portal built exclusively for Hyperion. Automatic job sync, XP progression, route maps, achievements and more — no spreadsheets, no third-party tools.</p>
+    <p class="hub-intro">A fully custom drivers portal built exclusively for Hyperion. Automatic job sync, XP progression, route maps, a live garage, achievements and more — no spreadsheets, no third-party tools.</p>
     <div class="features-grid">
       <div class="feature-cell">
         <div class="feature-icon">🚛</div>
         <div class="feature-title">Auto Job Sync</div>
-        <div class="feature-body">Every delivery logs automatically via Trucky. No manual entry, no copy-pasting.</div>
+        <div class="feature-body">Every delivery logs automatically via Trucky — distance, earnings, fuel economy, damage, speeding, even on-time rate.</div>
       </div>
       <div class="feature-cell">
         <div class="feature-icon">⚡</div>
         <div class="feature-title">XP & Ranks</div>
         <div class="feature-body">Earn XP every haul. Long haul bonuses, clean delivery rewards, streak multipliers. Rookie to Legend.</div>
+      </div>
+      <div class="feature-cell new">
+        <span class="feature-new-badge">New</span>
+        <div class="feature-icon">🛻</div>
+        <div class="feature-title">My Garage</div>
+        <div class="feature-body">Build out your fleet — including modded trucks. Each rig gets a live odometer, condition rating, and fuel economy, pulled straight from your job history.</div>
       </div>
       <div class="feature-cell">
         <div class="feature-icon">🗺️</div>
@@ -406,12 +414,7 @@
       <div class="feature-cell">
         <div class="feature-icon">🏆</div>
         <div class="feature-title">Achievements</div>
-        <div class="feature-body">15 auto-unlocking achievements including streak milestones, distance records, and clean delivery streaks.</div>
-      </div>
-      <div class="feature-cell">
-        <div class="feature-icon">📅</div>
-        <div class="feature-title">Convoy Events</div>
-        <div class="feature-body">Staff-organised convoys with full route info, server details, DLC requirements and Discord voice links.</div>
+        <div class="feature-body">20 auto-unlocking achievements — distance milestones, clean delivery streaks, on-time runs, and Perfect Run combos.</div>
       </div>
     </div>
     <a href="https://drivers.hyperionvtc.com" target="_blank" class="hub-cta">
