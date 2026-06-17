@@ -667,12 +667,13 @@ async function loadData() {
     if (d.upcomingEvents && d.upcomingEvents.length) {
       eEl.innerHTML = d.upcomingEvents.slice(0, 3).map(function(ev) {
         var dt = new Date(ev.eventDate);
-        var day = dt.getDate();
+        var day = dt.toLocaleString('en-CA', { day: 'numeric' });
         var mon = dt.toLocaleString('en-CA', { month: 'short' }).toUpperCase();
+        var time = dt.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' });
         return '<div class="event-card" style="margin-bottom:10px">'
           + '<div class="event-date-box"><div class="event-date-day">' + day + '</div><div class="event-date-month">' + mon + '</div></div>'
           + '<div class="event-info"><div class="event-title">' + ev.title + '</div>'
-          + '<div class="event-meta">' + (ev.attendeeCount || 0) + ' attending</div>'
+          + '<div class="event-meta">' + time + ' · ' + (ev.attendeeCount || 0) + ' attending</div>'
           + (ev.startCity && ev.endCity ? '<div class="event-route">📍 ' + ev.startCity + ' → ' + ev.endCity + '</div>' : '')
           + '</div></div>';
       }).join('');
