@@ -567,7 +567,7 @@
 <!-- RADIO PLAYER -->
 <div id="radio-player">
   <audio id="radio-audio" preload="none">
-    <source src="https://s5.radio.co/s2b6af2e87/listen" type="audio/mpeg">
+    <source src="https://mira.streamerr.co/listen/hyperion_radio/radio.mp3" type="audio/mpeg">
   </audio>
   <div class="radio-logo">
     <div class="radio-logo-mark">
@@ -616,7 +616,7 @@ function closeMobileNav() {
       status.className = 'radio-status'; status.innerHTML = 'Click to tune in';
     } else {
       status.className = 'radio-status'; status.innerHTML = 'Connecting…';
-      audio.src = 'https://s5.radio.co/s2b6af2e87/listen';
+      audio.src = 'https://mira.streamerr.co/listen/hyperion_radio/radio.mp3';
       audio.load();
       audio.play().then(function() {
         playing = true; iPlay.style.display = 'none'; iPause.style.display = '';
